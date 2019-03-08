@@ -4,6 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :omniauthable
          
+  validates :name,      presence: true, length: { maximum: 50 }
+  validates :user_name, presence: true, length: { maximum: 50 }
+         
   def self.find_for_oauth(auth)
     user = User.where(uid: auth.uid, provider: auth.provider).first
 
