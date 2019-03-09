@@ -25,6 +25,9 @@
       </div>
       <div class="form-wrap">
         <p class="text-center">
+          <%- resource_class.omniauth_providers.each do |provider| %>
+            <%= link_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider) %><br />
+          <% end %>
           アカウントをお持ちでないですか？
           <%= link_to "登録する", new_user_registration_path%>
         </p>
