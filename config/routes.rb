@@ -5,4 +5,9 @@ Rails.application.routes.draw do
   resources :posts, only: %i(index new create show destroy) do
     resources :photos, only: %i(create)
   end
+  resources :users do
+    member do
+      get :following, :followers
+    end
+  end
 end
