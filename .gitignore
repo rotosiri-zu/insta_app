@@ -32,3 +32,6 @@
 
 # Ignore facebook id and pass in env
 /.env
+
+# Ignore upload pictures
+public/uploads/
