@@ -2,6 +2,9 @@
   <div class="row">
     <div class="col-md-4 text-center">
       <%= image_tag avatar_url(@user), class: "round-img" %>
+      <section class="stats">
+        <%= render 'partial/stats' %>
+      </section>
     </div>
     <div class="col-md-8">
       <div class="row">
