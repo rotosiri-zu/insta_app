@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   end
   resources :posts, only: %i(index new create show destroy) do
     resources :photos, only: %i(create)
+    resources :likes, only: %i(create destroy), shallow: true
   end
   resources :relationships, only: %i(create destroy)
 end

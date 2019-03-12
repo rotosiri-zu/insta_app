@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   
   def index
     if user_signed_in?
-      @posts = current_user.feed.limit(10).includes(:photos, :user).order('created_at DESC')
+      @posts = current_user.feed.limit(10).includes(:photos, :user, :likes).order('created_at DESC')
     end
   end
   
@@ -29,6 +29,7 @@ class PostsController < ApplicationController
   
   def show
     @photos = @post.photos
+    @likes = @post.likes.includes(:user)
   end
   
   def destroy
