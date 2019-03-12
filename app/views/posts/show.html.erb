@@ -16,6 +16,7 @@
               title: @post.user.name do %>
               <strong><%= @post.user.name %></strong>
             <% end %>
+
             <% if @post.user_id == current_user.id %>
               <%= link_to post_path(@post), method: :delete, class: "ml-auto mx-0 my-auto" do %>
                 <div class="delete-post-icon">
@@ -30,6 +31,9 @@
           </div>
           <div class="comment-post-id">
             <div class="m-2">
+              <div id="comment-post-<%= @post.id.to_s %>">
+                <%= render 'comment_list', post: @post %>
+              </div>
             </div>
           </div>
         </div>
@@ -47,6 +51,13 @@
         </div>
         <div class="post-time"><%= time_ago_in_words(@post.created_at).upcase %>前</div>
         <hr>
+        <div class="row parts" id="comment-form-post-<%= @post.id.to_s %>">
+          <%= form_for [@post, Comment.new], html: { class: "w-100" }, remote: true do |f| %>
+            <%= f.hidden_field :user_id, value: current_user.id %>
+            <%= f.hidden_field :post_id, value: @post.id %>
+            <%= f.text_field :comment, class: "form-control comment-input border-0", placeholder: "コメント ...", autocomplete: :off %>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
