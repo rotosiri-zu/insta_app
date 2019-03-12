@@ -32,6 +32,7 @@ class User < ApplicationRecord
   end
   
   def feed
+    Post.where("user_id IN (:following_ids)", following_ids: following_ids)
   end
 
   def follow(other_user)
