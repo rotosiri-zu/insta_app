@@ -1,10 +1,12 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: %i(index)
   before_action :set_post, only: %i(show destroy)
   
   def index
     if user_signed_in?
       @posts = current_user.feed.limit(10).includes(:photos, :user, :likes).order('created_at DESC')
+    else
+      redirect_to home_path
     end
   end
   
