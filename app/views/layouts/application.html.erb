@@ -24,6 +24,8 @@
     <% end %>
     
     <%= yield %>
-    <%= render 'partial/footer' %>
+    <% if user_signed_in?%>
+      <%= render 'partial/footer' %>
+    <% end %>
   </body>
 </html>
