@@ -1,0 +1,18 @@
+<% @user ||= current_user %>
+<div class="stats">
+    <strong id="following" class="stat">
+      <%= @user.following.count %>
+    </strong>
+    following
+  </a>
+    <strong id="followers" class="stat">
+      <%= @user.followers.count %>
+    </strong>
+    followers
+  </a>
+    <strong id="photos" class="stat">
+      <%= @user.posts.map(&:photos).count %>
+    </strong>
+    photos
+  </a>
+</div>

@@ -1,0 +1,76 @@
+<% provide(:title, "Edit") %>
+<div class="col-md-offset-2 mb-4 edit-profile-wrapper">
+  <div class="row">
+    <div class="col-md-8 mx-auto">
+      <div class="profile-form-wrap">
+        <h2>編集ページ</h2>
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+          <div class="form-group">
+            <%= f.label :name, "名前" %>
+            <%= f.text_field :name, autofocus: true, class: "form-control" %>
+          </div>
+          
+          <div class="form-group">
+            <%= f.label :user_name, "ユーザーネーム" %>
+            <%= f.text_field :user_name, autofocus: true, class: "form-control" %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :website, "ウェブサイト" %>
+            <%= f.text_field :website, autofocus: true, class: "form-control" %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :bio, "自己紹介" %>
+            <%= f.text_field :bio, autofocus: true, class: "form-control" %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :email, "メールアドレス" %>
+            <%= f.email_field :email, autofocus: true, class: "form-control" %>
+          </div>
+          
+          <div class="form-group">
+            <%= f.label :phone_number, "電話番号" %>
+            <%= f.text_field :phone_number, autofocus: true, class: "form-control" %>
+          </div>
+          
+          <div class="form_group">
+            <%= f.label :sex, "性別" %><br />
+            <%= f.select(:sex,[["男性", "男性"], ["女性", "女性"]], class: 'form-control', :prompt => "性別を選択して下さい") %>
+          </div>
+
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+            <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+          <% end %>
+
+          <div class="field">
+            <%= f.label :password, "新しいパスワード" %> <i>(パスワードを変更しない場合は空欄)</i><br />
+            <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
+            <% if @minimum_password_length %>
+              <br />
+              <em><%= @minimum_password_length %> 文字以上のパスワード</em>
+            <% end %>
+          </div>
+        
+          <div class="field">
+            <%= f.label :password_confirmation, "新しいパスワードの確認" %><br />
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
+          </div>
+        
+          <div class="field">
+            <%= f.label :current_password, "現在のパスワード" %> <i>(プロフィールを変更する場合は入力が必要)</i><br />
+            <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control" %>
+          </div>
+          
+          <%= f.submit "変更する", class: "btn btn-primary" %>
+        <% end %>
+           
+          <%= button_to "アカウント削除", registration_path(resource_name), class: "btn btn-secondary pull-right", data: { confirm: "本当に削除してもよろしいですか？" }, method: :delete %>
+            
+          <%= link_to "Back", :back %>
+          
+      </div>
+    </div>
+  </div>
+</div>
