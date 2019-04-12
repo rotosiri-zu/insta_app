@@ -14,10 +14,10 @@ class User < ApplicationRecord
   has_many :followers, through: :passive_relationships, source: :follower
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :omniauthable
-         
+
   validates :name,      presence: true, length: { maximum: 50 }
   validates :user_name, presence: true, length: { maximum: 50 }
-         
+
   def self.find_for_oauth(auth)
     user = User.where(uid: auth.uid, provider: auth.provider).first
 
@@ -32,7 +32,15 @@ class User < ApplicationRecord
 
     user
   end
-  
+
+  def self.search(search) #ここでのself.はUser.を意味する
+    if search
+     where(['name LIKE ?', "%#{search}%"]) #検索とnameの部分一致を表示。User.は省略
+    else
+     all #全て表示。User.は省略
+    end
+  end
+
   def feed
     Post.where("user_id IN (:following_ids)", following_ids: following_ids)
   end
