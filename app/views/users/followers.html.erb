@@ -1,0 +1,10 @@
+<% provide(:title, 'followers') %>
+<h1 class="text-center">フォロワー</h1>
+
+<div class="center-block">
+  <ul class="users">
+    <% @user.followers.each do |follower| %>
+      <%= render "user", user: follower %>
+    <% end %>
+  </ul>
+</div>
