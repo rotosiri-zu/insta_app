@@ -1,6 +1,11 @@
 class LikesController < ApplicationController
   before_action :authenticate_user!
 
+  def index
+    @user = User.find(params[:user_id])
+    @posts = Post.find(Like.where(user_id: @user.id).pluck(:post_id))
+  end
+
   def create
     @like = current_user.likes.build(like_params)
     @post = @like.post
