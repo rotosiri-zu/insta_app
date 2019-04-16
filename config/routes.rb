@@ -17,4 +17,6 @@ Rails.application.routes.draw do
     resources :comments, only: %i(create destroy), shallow: true
   end
   resources :relationships, only: %i(create destroy)
+  resources :direct_messages, only: %i(create)
+  resources :direct_message_spaces, only: %i(create show)
 end

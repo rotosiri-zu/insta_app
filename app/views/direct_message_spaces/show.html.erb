@@ -1,0 +1,23 @@
+<div class="chatPage">
+  <header class="header">
+  <div class="chatPartner">
+    <div class="chatPartner_img"><%= image_tag avatar_url(@dm_space_user), class: "round-img" %></div>
+    <div class="chatPartner_name"><%= @dm_space_user.name %></div>
+  </div>
+  </header>
+  <div class="container">
+    <div class="messagesArea messages">
+      <%= render @direct_messages %>
+    </div>
+  </div>
+  <div class='container'>
+    <div class="row parts">
+      <%= form_with model: @direct_message, html: { class: "messageInputForm_input" } do |f| %>
+        <%= f.hidden_field :user_id, value: current_user.id %>
+        <%= f.hidden_field :direct_message_space_id, value: params[:id] %>
+        <%= f.text_field :message, class: "form-control comment-input border-0", placeholder: "メッセージを入力 ...", autocomplete: :off %>
+        <%= f.submit %>
+      <% end %>
+    </div>
+  </div>
+</div>

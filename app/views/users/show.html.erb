@@ -7,6 +7,10 @@
         <%= render 'partial/stats' %>
       </section>
       <%= render 'partial/follow_form' if user_signed_in? %>
+      <%= form_tag direct_message_spaces_path, method: :post do %>
+        <input name="user_id" type="hidden" value="<%= @user.id %>" />
+        <%= submit_tag 'チャットを開く' %>
+      <% end %>
     </div>
     <div class="col-md-8">
       <div class="row">
@@ -34,7 +38,7 @@
           </div>
         </div>
       </div>
-      
+
       <div class="row">
         <p>email:</p><%= @user.email if @user.email %>
       </div>
@@ -44,7 +48,7 @@
     </div>
   </div>
 </div>
-   
+
 <div class="posts">
   <% if @user.posts.any? %>
     <% @user.posts.each do |post|%>
