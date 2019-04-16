@@ -12,6 +12,7 @@ class User < ApplicationRecord
                                    dependent:   :destroy
   has_many :following, through: :active_relationships,  source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
+  has_many :direct_messages
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :omniauthable
 
@@ -33,11 +34,11 @@ class User < ApplicationRecord
     user
   end
 
-  def self.search(search) #ここでのself.はUser.を意味する
+  def self.search(search)
     if search
-     where(['name LIKE ?', "%#{search}%"]) #検索とnameの部分一致を表示。User.は省略
+     where(['name LIKE ?', "%#{search}%"])
     else
-     all #全て表示。User.は省略
+     all
     end
   end
 
