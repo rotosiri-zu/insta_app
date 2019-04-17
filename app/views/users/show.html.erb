@@ -7,9 +7,11 @@
         <%= render 'partial/stats' %>
       </section>
       <%= render 'partial/follow_form' if user_signed_in? %>
-      <%= form_tag direct_message_spaces_path, method: :post do %>
-        <input name="user_id" type="hidden" value="<%= @user.id %>" />
-        <%= submit_tag 'チャットを開く' %>
+      <% unless current_user?(@user) %>
+        <%= form_tag direct_message_spaces_path, method: :post do %>
+          <input name="user_id" type="hidden" value="<%= @user.id %>" />
+          <%= submit_tag 'チャットを開く' %>
+        <% end %>
       <% end %>
     </div>
     <div class="col-md-8">
