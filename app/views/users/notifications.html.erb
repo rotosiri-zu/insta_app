@@ -1,0 +1,12 @@
+<%= "#{@notifications.size}通の通知" %></br>
+<% @notifications.each do |notification| %>
+  <ul>
+    <% if notification.direct_message %>
+      <li>
+        <%= link_to direct_message_space_path(notification.direct_message.direct_message_space) do %>
+          <%= "#{notification.from_user.name}からダイレクトメッセージが届いています" %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
