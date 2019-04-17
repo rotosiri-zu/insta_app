@@ -6,6 +6,6 @@ class DirectMessagesController < ApplicationController
 
   private
     def direct_message_params
-      params.require(:direct_message).permit(:user_id, :direct_message_space_id, :message)
+      params.require(:direct_message).permit(:user_id, :direct_message_space_id, :message, notification_attributes: [:id, :to_user_id, :from_user_id] )
     end
 end

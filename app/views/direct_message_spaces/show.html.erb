@@ -16,6 +16,10 @@
         <%= f.hidden_field :user_id, value: current_user.id %>
         <%= f.hidden_field :direct_message_space_id, value: params[:id] %>
         <%= f.text_field :message, class: "form-control comment-input border-0", placeholder: "メッセージを入力 ...", autocomplete: :off %>
+        <%= f.fields_for :notification do |n| %>
+          <%= n.hidden_field :to_user_id, value: @dm_space_user.id %>
+          <%= n.hidden_field :from_user_id, value: current_user.id %>
+        <% end %>
         <%= f.submit %>
       <% end %>
     </div>
