@@ -1,17 +1,16 @@
-<% @user ||= current_user %>
+<% user ||= current_user %>
 <div class="stats">
-
   <strong id="photos" class="stat">
-    <%= "投稿#{@user.posts.map(&:photos).count}件" %>
+    <%= "投稿#{user.posts.map(&:photos).count}件" %>
   </strong>
-  <%= link_to followers_user_path(@user) do %>
+  <%= link_to followers_user_path(user) do %>
     <strong id="followers" class="stat">
-      <%= "フォロワー#{@user.followers.count}人" %>
+      <%= "フォロワー#{user.followers.count}人" %>
     </strong>
   <% end %>
-  <%= link_to following_user_path(@user) do %>
+  <%= link_to following_user_path(user) do %>
     <strong id="following" class="stat">
-      <%= "#{@user.following.count}人をフォロー中" %>
+      <%= "#{user.following.count}人をフォロー中" %>
     </strong>
   <% end %>
 </div>
