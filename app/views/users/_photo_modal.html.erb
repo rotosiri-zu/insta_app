@@ -19,7 +19,7 @@
                 <div class="card-right-comment">
                   <div class="card-right-name d-flex">
                     <%= image_tag avatar_url(post.user), class: "post-profile-icon" %>
-                    <strong><%= post.user.name %></strong>
+                    <strong><%= post.user.user_name %></strong>
                     <% if post.user_id == current_user.id %>
                       <%= link_to post_path(post), method: :delete, class: "ml-auto mx-0 my-auto" do %>
                         <div class="delete-post-icon">
