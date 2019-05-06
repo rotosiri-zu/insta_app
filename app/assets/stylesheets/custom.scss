@@ -312,3 +312,20 @@ body {
 .bio{
   width:60%;
 }
+
+.userBox{
+  background-color: #fff;
+  border-bottom: 1px solid rgba(0, 0, 0, .0975);
+}
+figure img{
+    width: 100%;
+    height: 100%;
+    float:right;
+}
+.follow-follower {
+  color:black;
+  text-align:center;
+  &.active{
+    font-weight:bold;
+  }
+}

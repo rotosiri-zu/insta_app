@@ -1,10 +1,10 @@
 <% provide(:title, 'followers') %>
-<h1 class="text-center">フォロワー</h1>
-
-<div class="center-block">
-  <ul class="users">
-    <% @user.followers.each do |follower| %>
-      <%= render "user", user: follower %>
-    <% end %>
-  </ul>
+<div class="container">
+  <div class="btn-group d-flex" role="group">
+    <%= link_to "following", following_user_path(params[:id]),class: "btn btn-dafault w-100" %>
+    <%= link_to "followers", followers_user_path(params[:id]),class: "btn btn-primary w-100" %>
+  </div>
+  <% @user.followers.each do |follower| %>
+    <%= render "user", user: follower %>
+  <% end %>
 </div>
