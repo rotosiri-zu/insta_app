@@ -1,8 +1,10 @@
 <div class="chatPage">
   <header class="header">
   <div class="chatPartner">
-    <div class="chatPartner_img"><%= image_tag avatar_url(@dm_space_user), class: "round-img" %></div>
-    <div class="chatPartner_name"><%= @dm_space_user.name %></div>
+    <%= image_tag avatar_url(@dm_space_user), class: "round-img" %>
+    <div class="text-center">
+      <%= @dm_space_user.user_name %>
+    <div>
   </div>
   </header>
   <div class="container">

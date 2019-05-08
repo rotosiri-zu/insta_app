@@ -1,3 +1,25 @@
-<div class="message">
-  <span><%= direct_message.user.name %>:</span><div class="commonMessage"><div><%= direct_message.message %></div></div>
-</div>
+<% if direct_message.user == current_user %>
+  <div class="message selfMessage d-flex align-items-center">
+    <%= image_tag avatar_url(direct_message.user), class: "post-profile-icon" %>
+    <span class="mr-2">
+      <%= direct_message.user.user_name %>
+    </span>
+    <div class="commonMessage selfMessage">
+      <div>
+        <%= direct_message.message %>
+      </div>
+    </div>
+  </div>
+<% else %>
+  <div class="message">
+    <%= image_tag avatar_url(direct_message.user), class: "post-profile-icon" %>
+    <span>
+      <%= direct_message.user.user_name %>
+    </span>
+    <div class="commonMessage">
+      <div>
+        <%= direct_message.message %>
+      </div>
+    </div>
+  </div>
+<% end %>
