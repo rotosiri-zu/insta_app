@@ -4,14 +4,11 @@
     <title><%= full_title(yield(:title)) %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
     <%= render 'partial/navbar' if current_user %>
-
     <% if flash[:notice] %>
       <div class="alert alert-info">
         <%= flash[:notice] %>
@@ -22,11 +19,7 @@
         <%= flash[:alert] %>
       </div>
     <% end %>
-
     <%= yield %>
-    <% if user_signed_in?%>
-      <%= render 'partial/footer' %>
-    <% end %>
     <%= debug(params) if Rails.env.development? %>
   </body>
 </html>
