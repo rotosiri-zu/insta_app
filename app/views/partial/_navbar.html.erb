@@ -1,21 +1,66 @@
-<nav class="navbar navbar-expand-lg navbar-light">
-  <div class="container">
-    <%= link_to "", root_path, class: "navbar__brand navbar__mainLogo" %>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedConten" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-md-auto align-items-center">
-        <li>
-          <%= link_to "", likes_user_path(current_user), class: "nav-link commonNavIcon love" %>
-        </li>
-        <li>
-          <%= link_to "", notifications_user_path(current_user), class: "nav-link commonNavIcon comment" %>
-        </li>
-        <li>
-          <%= link_to "", user_path(current_user), class: "nav-link commonNavIcon profile-icon" %>
-        </li>
-      </ul>
-    </div>
+<nav class="navbar navbar-icon-top navbar-expand-lg navbar-dark bg-dark">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <%= link_to(root_path, class: "nav-link active") do %>
+          <i class="fa fa-home"></i>
+          Timeline
+        <% end %>
+        <span class="sr-only">(current)</span>
+      </li>
+      <li class="nav-item">
+        <%= link_to(notifications_user_path(current_user), class: "nav-link") do %>
+          <i class="fa fa-bell">
+            <span class="badge badge-info">11</span>
+          </i>
+          Notification
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">
+          <i class="fa fa-envelope-o">
+            <span class="badge badge-danger">11</span>
+          </i>
+          DM
+        </a>
+      </li>
+      <li class="nav-item">
+        <%= link_to(liked_user_path(current_user), class: "nav-link") do %>
+          <i class="fa fa-heart-o">
+            <span class="badge badge-warning">11</span>
+          </i>
+          Likes
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to(new_post_path, class: "nav-link") do %>
+          <i class="fa fa-camera"></i>
+          post
+        <% end %>
+      </li>
+    </ul>
+    <ul class="navbar-nav ">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-cog"></i>
+          config
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <%= link_to("User Page", user_path(current_user), class: "dropdown-item") %>
+          <%= link_to("User Edit", edit_user_registration_path, class: "dropdown-item") %>
+          <%= link_to("Log Out", destroy_user_session_path, method: :delete, class: "dropdown-item") %>
+
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Cancel</a>
+        </div>
+      </li>
+    </ul>
+    <%= form_tag(users_path, method: "get", class: "form-inline my-2 my-lg-0") do %>
+      <%= text_field_tag :search, "",　class: "font-awesome form-control mr-sm-2", placeholder: "ユーザ名検索" %>
+      <%= button_tag sanitize('<i class="fa fa-search"></i>'), type: "submit", class: "btn btn-default btn-s-md my-2 my-sm-0" %>
+    <% end %>
   </div>
 </nav>
