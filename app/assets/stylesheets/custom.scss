@@ -106,6 +106,15 @@ body {
   background-size: 40px !important;
 }
 
+.profile-icon{
+  margin-left: 8px;
+  background-image: image-url("parts3");
+  background-repeat: no-repeat;
+  height: 36px;
+  width: 36px;
+  background-size: 40px !important;
+}
+
 .post-time {
   margin:0;
   color:#999;
@@ -199,25 +208,11 @@ body {
       border-color:  transparent transparent #fd5068 #fd5068;
       transform: rotate(45deg);
     }
-    .chatPartner {
-      &_name {
-        margin-top: 10px;
-        text-align: center;
-      }
-      &_img {
-        width: 100px;
-        height: 120px;
-        border-radius: 50%;
-        overflow: hidden;
-        & > img {
-          width: 100%;
-        }
-      }
-    }
   }
   .messagesArea {
     overflow: scroll;
     height: 72vh;
+    background-color: white;
     .message {
       &.selfMessage {
         display: flex;
@@ -317,15 +312,19 @@ body {
   background-color: #fff;
   border-bottom: 1px solid rgba(0, 0, 0, .0975);
 }
+
 figure img{
     width: 100%;
     height: 100%;
     float:right;
 }
-.follow-follower {
-  color:black;
-  text-align:center;
-  &.active{
-    font-weight:bold;
-  }
+
+input.font-awesome {
+  display: inline-block;
+  font-family: fontawesome;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
