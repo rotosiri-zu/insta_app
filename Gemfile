@@ -80,7 +80,7 @@ end
 
 group :production do
   gem 'fog'
-  gem 'asset_sync'
+  # gem 'asset_sync'
 end
 
 group :production, :staging do
