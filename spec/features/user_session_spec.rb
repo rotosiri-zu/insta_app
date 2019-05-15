@@ -13,6 +13,17 @@ RSpec.feature "UserSessions", type: :feature do
     expect(page).to have_content "アカウント登録を受け付けました。"
   end
 
+  scenario "invalid user register" do
+    visit new_user_registration_path
+    fill_in "メールアドレス", with: "invalid@mail.com"
+    fill_in "名前" , with: "invalid_name"
+    fill_in "ユーザーネーム", with: "invalid_user_name"
+    fill_in "パスワード", with: "hogehoge"
+    fill_in "パスワードの確認", with: "foobar"
+    click_button "登録する"
+    expect(page).to have_content "この user を保存できません"
+  end
+
   scenario "edit user's profile" do
     user = FactoryBot.create(:user)
     sign_in user
