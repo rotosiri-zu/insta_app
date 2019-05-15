@@ -43,7 +43,21 @@ ja:
         restrict_dependent_destroy:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
-
+      models:
+        user:
+          attributes:
+            email:
+              blank: "emailは空白にできません"
+              taken: "このemailは他の人に既に登録されています"
+            name:
+              blank: "名前は空白にできません"
+            password:
+              blank: "passwordは空白にできません"
+              too_short: "passwordは6文字以上必要です"
+            password_confirmation:
+              confirmation: "確認のためのパスワードが一致しません"
+            user_name:
+              blank: "ユーザーネームは空白にできません"
 
   devise:
     confirmations:
