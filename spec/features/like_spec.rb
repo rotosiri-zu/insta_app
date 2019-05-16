@@ -19,6 +19,7 @@ RSpec.feature "Likes", type: :feature do
     wait_for_ajax do
       expect(user.reload.likes.size).to eq 1
       expect(post.reload.likes.size).to eq 1
+      expect(page).to have_content "#{user.user_name} が「いいね！」しました"
     end
     visit likes_user_path(user)
     within(".card-wrap") do
