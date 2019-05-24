@@ -36,6 +36,24 @@ RSpec.describe User, type: :model do
     user.valid?
     expect(user.errors[:email]).to include("このemailは他の人に既に登録されています")
   end
+  it "password should be present (nonblank)" do
+    user = FactoryBot.build(:user)
+    user.password = " " * 6
+    user.password_confirmation = " " * 6
+    expect(user.valid?).to eq false
+  end
+  it "password should have a minimum length" do
+    user = FactoryBot.build(:user)
+    user.password = "a" * 5
+    user.password_confirmation = "a" * 5
+    expect(user.valid?).to eq false
+  end
+  it "associated posts should be destroyed" do
+    user = FactoryBot.build(:user)
+    user.save
+    user.posts.create!
+    expect{user.destroy}.to change(user.posts, :count).by(-1)
+  end
   it "should follow and unfollow a user" do
     user1 = FactoryBot.create(:user)
     user2 = FactoryBot.create(:user)
