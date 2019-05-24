@@ -1,4 +1,5 @@
 class DirectMessagesController < ApplicationController
+  before_action :authenticate_user!
   def create
     @direct_message = DirectMessage.create(direct_message_params)
     redirect_to direct_message_space_path(id: params[:direct_message][:direct_message_space_id])
