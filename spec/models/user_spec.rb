@@ -10,10 +10,20 @@ RSpec.describe User, type: :model do
     user.valid?
     expect(user.errors[:name]).to include("名前は空白にできません")
   end
-  it "is invalid without a last name" do
+  it "is invalid with too long (50 characters) name" do
+    user = FactoryBot.build(:user, name: "*"*51)
+    user.valid?
+    expect(user.errors[:name]).to include("50文字以内の名前のみ登録できます")
+  end
+  it "is invalid without a user_name" do
     user = FactoryBot.build(:user, user_name: nil)
     user.valid?
     expect(user.errors[:user_name]).to include("ユーザーネームは空白にできません")
+  end
+  it "is invalid with too long (50 characters) user_name" do
+    user = FactoryBot.build(:user, user_name: "*"*51)
+    user.valid?
+    expect(user.errors[:user_name]).to include("50文字以内のユーザーネームのみ登録できます")
   end
   it "is invalid without an email address" do
     user = FactoryBot.build(:user, email: nil)

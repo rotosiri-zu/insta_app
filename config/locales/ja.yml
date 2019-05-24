@@ -51,6 +51,7 @@ ja:
               taken: "このemailは他の人に既に登録されています"
             name:
               blank: "名前は空白にできません"
+              too_long: "50文字以内の名前のみ登録できます"
             password:
               blank: "passwordは空白にできません"
               too_short: "passwordは6文字以上必要です"
@@ -58,6 +59,7 @@ ja:
               confirmation: "確認のためのパスワードが一致しません"
             user_name:
               blank: "ユーザーネームは空白にできません"
+              too_long: "50文字以内のユーザーネームのみ登録できます"
 
   devise:
     confirmations:
