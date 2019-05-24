@@ -54,6 +54,13 @@ RSpec.describe User, type: :model do
     user.posts.create!
     expect{user.destroy}.to change(user.posts, :count).by(-1)
   end
+  it "associated likes should be destroyed" do
+    user1 = FactoryBot.create(:user)
+    user2 = FactoryBot.create(:user)
+    post = user2.posts.create!
+    Like.create(user: user1, post: post)
+    expect{user1.destroy}.to change(user1.likes, :count).by(-1)
+  end
   it "should follow and unfollow a user" do
     user1 = FactoryBot.create(:user)
     user2 = FactoryBot.create(:user)
