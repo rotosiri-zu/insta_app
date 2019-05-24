@@ -36,4 +36,14 @@ RSpec.describe User, type: :model do
     user.valid?
     expect(user.errors[:email]).to include("このemailは他の人に既に登録されています")
   end
+  it "should follow and unfollow a user" do
+    user1 = FactoryBot.create(:user)
+    user2 = FactoryBot.create(:user)
+    expect(user1.following?(user2)).to eq false
+    user1.follow(user2)
+    expect(user1.following?(user2)).to eq true
+    expect(user2.followers.include?(user1)).to eq true
+    user1.unfollow(user2)
+    expect(user1.following?(user2)).to eq false
+  end
 end
