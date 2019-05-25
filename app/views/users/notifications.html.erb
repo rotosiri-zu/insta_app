@@ -1,14 +1,15 @@
 <% provide(:title, "notification") %>
 <div class="container text-center">
-  <%= "#{@notifications.size}件の通知" %></br>
+  <h3><%= "#{@notifications.size}件の通知" %></h3>
   <% @notifications.each do |notification| %>
     <% if notification.direct_message %>
       <div class="userBox">
         <div class="row">
-          <div class="col-md-2 col-sm-2">
+          <div class="col-md-2 col-sm-2 d-flex align-items-center">
+            <%= notification.from_user.user_name %>
             <%= link_to notification.from_user do %>
               <figure>
-                <%= image_tag avatar_url(notification.from_user), class: "post-profile-icon mb-3" %>
+                <%= image_tag avatar_url(notification.from_user), class: "post-profile-icon m-3" %>
               </figure>
             <% end %>
           </div>
