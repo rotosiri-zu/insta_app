@@ -54,10 +54,16 @@ ActiveRecord::Schema.define(version: 2019_04_16_070515) do
   create_table "notifications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "to_user_id", null: false
     t.integer "from_user_id", null: false
-    t.integer "direct_message_id"
+    t.bigint "direct_message_id"
+    t.bigint "like_id"
+    t.bigint "comment_id"
+    t.bigint "relationship_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["comment_id"], name: "index_notifications_on_comment_id"
     t.index ["direct_message_id"], name: "index_notifications_on_direct_message_id"
+    t.index ["like_id"], name: "index_notifications_on_like_id"
+    t.index ["relationship_id"], name: "index_notifications_on_relationship_id"
   end
 
   create_table "photos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -107,4 +113,8 @@ ActiveRecord::Schema.define(version: 2019_04_16_070515) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "notifications", "comments"
+  add_foreign_key "notifications", "direct_messages"
+  add_foreign_key "notifications", "likes"
+  add_foreign_key "notifications", "relationships"
 end
