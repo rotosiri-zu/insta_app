@@ -1,0 +1,30 @@
+<% provide(:title, "dm") %>
+<div class="container text-center">
+  <h3>DM一覧</h3>
+  <% if @dm_spaces %>
+    <% @dm_spaces.zip(@dm_users).each do |dm_space, dm_user| %>
+      <div class="userBox">
+        <div class="row">
+          <div class="col-md-2 col-sm-2 d-flex align-items-center">
+            <%= dm_user.user_name %>
+            <%= link_to dm_user do %>
+              <figure>
+                <%= image_tag avatar_url(dm_user), class: "post-profile-icon m-3" %>
+              </figure>
+            <% end %>
+          </div>
+          <div class="col-md-6 col-sm-4 d-flex align-items-center">
+            <% if dm_space.direct_messages.last %>
+              <span class="mr-3">
+                <%= "#{dm_space.direct_messages.last.user.user_name}:" %>
+              </span>
+              <%= link_to direct_message_space_path(dm_space) do %>
+                <%= "#{dm_space.direct_messages.last.message}" %>
+              <% end%>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
