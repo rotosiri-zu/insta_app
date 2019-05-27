@@ -2,7 +2,7 @@
 <div class="container text-center">
   <h3><%= "#{@notifications.size}件の通知" %></h3>
   <% @notifications.each do |notification| %>
-    <% if notification.direct_message %>
+    <% if notification %>
       <div class="userBox">
         <div class="row">
           <div class="col-md-2 col-sm-2 d-flex align-items-center">
@@ -14,8 +14,26 @@
             <% end %>
           </div>
           <div class="col-md-6 col-sm-4 d-flex align-items-center">
-            <%= link_to direct_message_space_path(notification.direct_message.direct_message_space) do %>
-              <%= "#{notification.from_user.user_name}からダイレクトメッセージが届いています" %>
+            <% if notification.direct_message %>
+              <%= link_to direct_message_space_path(notification.direct_message.direct_message_space) do %>
+                <%= "#{notification.from_user.user_name}からダイレクトメッセージが届いています" %>
+              <% end %>
+            <% end %>
+            <% if notification.like %>
+              <%= link_to post_path(notification.like.post) do %>
+                <%= "#{notification.from_user.user_name}からいいねが届いています" %>
+              <% end %>
+            <% end %>
+            <% if notification.comment %>
+              <%= link_to post_path(notification.comment.post) do %>
+                <%= "#{notification.from_user.user_name}からコメントが届いています" %>
+              <% end %>
+              <%= "　#{notification.from_user.user_name}：#{notification.comment.comment}" %>
+            <% end %>
+            <% if notification.relationship %>
+              <%= link_to user_path(notification.from_user) do %>
+                <%= "#{notification.from_user.user_name}からフォローされました" %>
+              <% end %>
             <% end %>
           </div>
         </div>
