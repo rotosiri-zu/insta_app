@@ -1,7 +1,13 @@
 class DirectMessagesController < ApplicationController
   before_action :authenticate_user!
   def create
-    @direct_message = DirectMessage.create(direct_message_params)
+    @direct_message = DirectMessage.new(direct_message_params)
+    if @direct_message.save
+      Pusher.trigger('dm-channel','new-dm', {
+              user_name: current_user.user_name,
+              message: @direct_message.message 
+            })
+    end
     redirect_to direct_message_space_path(id: params[:direct_message][:direct_message_space_id])
   end
 
