@@ -2,8 +2,8 @@
 <div class="container text-center">
   <h3>DM一覧</h3>
   <% if @dm_spaces %>
-    <% @dm_spaces.zip(@dm_users).each do |dm_space, dm_user| %>
-      <div class="userBox">
+    <% @dm_spaces.zip(@dm_users, @dm_unchecked_counts).each do |dm_space, dm_user, dm_unchecked_count| %>
+      <div class="userBox h5">
         <div class="row">
           <div class="col-md-2 col-sm-2 d-flex align-items-center">
             <%= dm_user.user_name %>
@@ -21,6 +21,16 @@
               <%= link_to direct_message_space_path(dm_space) do %>
                 <%= "#{dm_space.direct_messages.last.message}" %>
               <% end%>
+            <% end %>
+          </div>
+          <div class="col-md-2 d-flex align-items-center">
+            <% if dm_space.direct_messages.last %>
+              <%= time_ago_in_words(dm_space.direct_messages.last.created_at).upcase%>前
+            <% end %>
+          </div>
+          <div class="col-md-2 d-flex align-items-center">
+            <% if dm_unchecked_count > 0 %>
+              <span class="badge badge-danger"><%= dm_unchecked_count %></span>
             <% end %>
           </div>
         </div>
