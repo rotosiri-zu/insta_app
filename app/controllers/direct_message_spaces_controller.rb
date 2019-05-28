@@ -18,6 +18,7 @@ class DirectMessageSpacesController < ApplicationController
     @direct_message = current_user.direct_messages.build
     @direct_message.build_notification
     @direct_messages = DirectMessage.includes(:user).where(direct_message_space: dm_space).order(:created_at)
+    @direct_messages.where.not(user_id: current_user.id).update_all(checked: true)
   end
 
 end

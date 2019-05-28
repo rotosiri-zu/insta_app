@@ -21,6 +21,14 @@
                 <%= direct_message.message %>
               </div>
             </div>
+            <div>
+              <div>
+                <%= time_ago_in_words(direct_message.created_at).upcase %>前
+              </div>
+              <% if direct_message.checked %>
+                <div>既読</div>
+              <% end %>
+            </div>
           </div>
         <% else %>
           <div class="message">
@@ -33,6 +41,9 @@
                 <%= direct_message.message %>
               </div>
             </div>
+            <span>
+              <%= time_ago_in_words(direct_message.created_at).upcase %>前
+            </span>  
           </div>
         <% end %>
       <% end %>
