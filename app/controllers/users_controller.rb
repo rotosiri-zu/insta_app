@@ -26,7 +26,12 @@ class UsersController < ApplicationController
   end
 
   def notifications
-    @notifications = Notification.where(to_user_id: current_user.id)
+    @notifications = Notification.where(to_user_id: current_user.id).order('created_at DESC')
+  end
+
+  def notification_check
+    Notification.where(to_user_id: current_user.id, checked: false).update_all(checked: true)
+    redirect_to notifications_user_path(current_user)
   end
 
   def dm
