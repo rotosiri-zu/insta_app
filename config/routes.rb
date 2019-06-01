@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :users do
     member do
       get :following, :followers, :likes, :liked, :notifications, :dm
+      put :notification_check
     end
   end
   resources :posts, only: %i(index new create show destroy) do

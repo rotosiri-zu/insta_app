@@ -14,7 +14,9 @@
       <li class="nav-item">
         <%= link_to(notifications_user_path(current_user), class: "nav-link") do %>
           <i class="fa fa-bell">
-            <span class="badge badge-info">11</span>
+            <% if @notification_count > 0 %>
+              <span class="badge badge-info"><%= @notification_count %></span>
+            <% end %>
           </i>
           Notification
         <% end %>
@@ -22,7 +24,9 @@
       <li class="nav-item">
         <%= link_to(dm_user_path(current_user), class: "nav-link") do %>
           <i class="fa fa-envelope">
-            <span class="badge badge-danger">11</span>
+            <% if @dm_count > 0 %>
+              <span class="badge badge-danger"><%= @dm_count %></span>
+            <% end %>
           </i>
           DM
         <% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_16_070515) do
+ActiveRecord::Schema.define(version: 2019_05_28_144800) do
 
   create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "comment", null: false
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 2019_04_16_070515) do
     t.string "message", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "checked", default: false, null: false
   end
 
   create_table "likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -60,6 +61,7 @@ ActiveRecord::Schema.define(version: 2019_04_16_070515) do
     t.bigint "relationship_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "checked", default: false, null: false
     t.index ["comment_id"], name: "index_notifications_on_comment_id"
     t.index ["direct_message_id"], name: "index_notifications_on_direct_message_id"
     t.index ["like_id"], name: "index_notifications_on_like_id"

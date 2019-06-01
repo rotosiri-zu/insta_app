@@ -14,6 +14,9 @@ RSpec.feature "Notifications", type: :feature do
       visit notifications_user_path(user)
     }.to change{Notification.all.size}.by(1)
     expect(page).to have_content "#{other.user_name}からフォローされました"
+    within("i.fa-bell") do
+      expect(page).to have_content 1
+    end
   end
   scenario "come when user's post is liked", js:true do
     @post = user.posts.create
@@ -29,6 +32,9 @@ RSpec.feature "Notifications", type: :feature do
       visit notifications_user_path(user)
     }.to change{Notification.all.size}.by(1)
     expect(page).to have_content "#{other.user_name}からいいねが届いています"
+    within("i.fa-bell") do
+      expect(page).to have_content 1
+    end
   end
   scenario "come when user's post is commented", js:true do
     @post = user.posts.create
@@ -45,6 +51,9 @@ RSpec.feature "Notifications", type: :feature do
       visit notifications_user_path(user)
     }.to change{Notification.all.size}.by(1)
     expect(page).to have_content "#{other.user_name}からコメントが届いています"
+    within("i.fa-bell") do
+      expect(page).to have_content 1
+    end
   end
   scenario "come when direct message is given" do
     expect{
@@ -57,5 +66,11 @@ RSpec.feature "Notifications", type: :feature do
       visit notifications_user_path(user)
     }.to change{Notification.all.size}.by(1)
     expect(page).to have_content "#{other.user_name}からダイレクトメッセージが届いています"
+    within("i.fa-bell") do
+      expect(page).to have_content 1
+    end
+    within("i.fa-envelope") do
+      expect(page).to have_content 1
+    end
   end
 end

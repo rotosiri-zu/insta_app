@@ -7,6 +7,15 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
+    <script>
+      Pusher.logToConsole = true;
+
+      var pusher = new Pusher(PUSHER_APP_KEY, {
+        cluster: 'ap3',
+        forceTLS: true
+      });
+    </script>
   </head>
   <body>
     <%= render 'partial/navbar' if current_user %>

@@ -26,7 +26,12 @@ class UsersController < ApplicationController
   end
 
   def notifications
-    @notifications = Notification.where(to_user_id: current_user.id)
+    @notifications = Notification.where(to_user_id: current_user.id).order('created_at DESC')
+  end
+
+  def notification_check
+    Notification.where(to_user_id: current_user.id, checked: false).update_all(checked: true)
+    redirect_to notifications_user_path(current_user)
   end
 
   def dm
@@ -34,5 +39,9 @@ class UsersController < ApplicationController
     @dm_spaces = DirectMessageSpaceUser.where(direct_message_space: current_user_dm_spaces).where.not(user_id: current_user.id).map(&:direct_message_space)
     dm_users_id = DirectMessageSpaceUser.where(direct_message_space: @dm_spaces).where.not(user_id: current_user.id).map(&:user_id)
     @dm_users = User.where(id: dm_users_id)
+    @dm_unchecked_counts = []
+    @dm_spaces.zip(@dm_users).each do |dm_space, dm_user|
+      @dm_unchecked_counts << DirectMessage.where(direct_message_space_id: dm_space.id, user_id: dm_user.id, checked: false).count
+    end
   end
 end
