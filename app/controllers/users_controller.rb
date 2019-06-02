@@ -5,6 +5,13 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    unless current_user == @user
+      if foot_stamp = FootStamp.where(to_user_id: @user.id, from_user_id: current_user.id).to_a.first
+        foot_stamp.touch
+      else
+        FootStamp.create(to_user_id: @user.id, from_user_id: current_user.id)
+      end
+    end
   end
 
   def following
@@ -43,5 +50,9 @@ class UsersController < ApplicationController
     @dm_spaces.zip(@dm_users).each do |dm_space, dm_user|
       @dm_unchecked_counts << DirectMessage.where(direct_message_space_id: dm_space.id, user_id: dm_user.id, checked: false).count
     end
+  end
+
+  def foot_stamps
+    @foot_stamps = FootStamp.where(to_user_id: current_user.id).order("updated_at DESC")
   end
 end
