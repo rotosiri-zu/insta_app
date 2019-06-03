@@ -1,6 +1,7 @@
 <% provide(:title, "foot_stamps") %>
 <div class="container text-center">
   <h3>足跡一覧</h3>
+  <%= link_to "足跡の設定", edit_user_registration_path %>
   <% if @foot_stamps %>
     <% @foot_stamps.each do |foot_stamp| %>
       <div class="userBox">
