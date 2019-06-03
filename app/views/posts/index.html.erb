@@ -9,8 +9,8 @@
             <%= image_tag avatar_url(post.user), class: "post-profile-icon" %>
           <% end %>
           <%= link_to user_path(post.user), class: "black-color no-text-decoration",
-            title: post.user.name do %>
-            <strong><%= post.user.name %></strong>
+            title: post.user.user_name do %>
+            <strong><%= post.user.user_name %></strong>
           <% end %>
 
           <% if post.user_id == current_user.id %>
@@ -44,7 +44,7 @@
           </div>
 
           <div>
-            <span><strong><%= post.user.name %></strong></span>
+            <span><strong><%= post.user.user_name %></strong></span>
             <span><%= post.caption %></span>
             <%= link_to time_ago_in_words(post.created_at).upcase + "前", post_path(post), class: "post-time no-text-decoration" %>
 
