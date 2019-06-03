@@ -3,7 +3,7 @@ class CreateFootStamps < ActiveRecord::Migration[5.2]
     create_table :foot_stamps do |t|
       t.integer :to_user_id, null: false
       t.integer :from_user_id, null: false
-      t.boolean :leave_stamp?, default: true, null: false
+      t.boolean :checked, default: false, null: false
 
       t.timestamps
     end
