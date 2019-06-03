@@ -35,14 +35,20 @@
         <%= link_to(liked_user_path(current_user), class: "nav-link") do %>
           <i class="fa fa-heart">
             <span class="badge badge-warning">11</span>
-	  </i>
+	        </i>
           Likes
         <% end %>
       </li>
       <li class="nav-item">
         <%= link_to(new_post_path, class: "nav-link") do %>
           <i class="fa fa-camera"></i>
-          post
+          新規投稿
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to(foot_stamps_user_path(current_user), class: "nav-link") do %>
+          <i class="fa fa-shoe-prints"></i>
+          足跡
         <% end %>
       </li>
     </ul>
