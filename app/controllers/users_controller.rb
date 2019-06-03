@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    unless current_user == @user
+    if current_user.stamp_true && current_user != @user
       foot_stamp = FootStamp.find_by(to_user_id: @user.id, from_user_id: current_user.id)
       if foot_stamp
         foot_stamp.touch
