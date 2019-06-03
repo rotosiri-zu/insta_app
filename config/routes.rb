@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get  '/about', to: 'static_pages#about'
   resources :users do
     member do
-      get :following, :followers, :likes, :liked, :notifications, :dm
+      get :following, :followers, :likes, :liked, :notifications, :dm, :foot_stamps
       put :notification_check
     end
   end

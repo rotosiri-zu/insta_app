@@ -33,6 +33,10 @@
             <%= f.label :sex, "性別" %><br />
             <%= f.select(:sex,[["男性", "男性"], ["女性", "女性"]], class: 'form-control', :prompt => "性別を選択して下さい") %>
           </div>
+          <div class="form_group">
+            <%= f.label :stamp_true, "足跡設定" %><br />
+            <%= f.select(:stamp_true,[["足跡をつける", "true"], ["足跡をつけない", "false"]], class: "form-control") %>
+          </div>
           <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
             <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
           <% end %>

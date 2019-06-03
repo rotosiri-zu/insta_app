@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_28_144800) do
+ActiveRecord::Schema.define(version: 2019_06_03_054416) do
 
   create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "comment", null: false
@@ -41,6 +41,14 @@ ActiveRecord::Schema.define(version: 2019_05_28_144800) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "checked", default: false, null: false
+  end
+
+  create_table "foot_stamps", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "to_user_id", null: false
+    t.integer "from_user_id", null: false
+    t.boolean "checked", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -111,6 +119,7 @@ ActiveRecord::Schema.define(version: 2019_05_28_144800) do
     t.string "phone_number"
     t.string "sex"
     t.string "profile_photo"
+    t.boolean "stamp_true", default: true, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
