@@ -32,10 +32,18 @@
         <% end %>
       </li>
       <li class="nav-item">
+        <%= link_to(foot_stamps_user_path(current_user), class: "nav-link") do %>
+          <i class="fa fa-shoe-prints">
+            <% if @foot_stamp_count > 0 %>
+              <span class="badge badge-warning"><%= @foot_stamp_count %></span>
+            <% end %>
+          </i>
+          足跡
+        <% end %>
+      </li>
+      <li class="nav-item">
         <%= link_to(liked_user_path(current_user), class: "nav-link") do %>
-          <i class="fa fa-heart">
-            <span class="badge badge-warning">11</span>
-	        </i>
+        <i class="fa fa-heart"></i>
           Likes
         <% end %>
       </li>
@@ -43,12 +51,6 @@
         <%= link_to(new_post_path, class: "nav-link") do %>
           <i class="fa fa-camera"></i>
           新規投稿
-        <% end %>
-      </li>
-      <li class="nav-item">
-        <%= link_to(foot_stamps_user_path(current_user), class: "nav-link") do %>
-          <i class="fa fa-shoe-prints"></i>
-          足跡
         <% end %>
       </li>
     </ul>

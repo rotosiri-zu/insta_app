@@ -6,8 +6,10 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     unless current_user == @user
-      if foot_stamp = FootStamp.where(to_user_id: @user.id, from_user_id: current_user.id).to_a.first
+      foot_stamp = FootStamp.find_by(to_user_id: @user.id, from_user_id: current_user.id)
+      if foot_stamp
         foot_stamp.touch
+        foot_stamp.checked = false
       else
         FootStamp.create(to_user_id: @user.id, from_user_id: current_user.id)
       end
@@ -54,5 +56,6 @@ class UsersController < ApplicationController
 
   def foot_stamps
     @foot_stamps = FootStamp.where(to_user_id: current_user.id).order("updated_at DESC")
+    FootStamp.where(to_user_id: current_user.id, checked: false).update_all(checked: true)
   end
 end

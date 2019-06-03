@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :get_notification_count
   before_action :get_dm_count
+  before_action :get_foot_stamp_count
 
   def get_notification_count
     if current_user
@@ -21,6 +22,12 @@ class ApplicationController < ActionController::Base
       @dm_spaces.zip(@dm_users).each do |dm_space, dm_user|
         @dm_count += DirectMessage.where(direct_message_space_id: dm_space.id, user_id: dm_user.id, checked: false).count
       end
+    end
+  end
+
+  def get_foot_stamp_count
+    if current_user
+      @foot_stamp_count = FootStamp.where(to_user_id: current_user.id, checked: false).count
     end
   end
 
