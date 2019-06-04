@@ -1,13 +1,8 @@
 <div class="modal fade" id="photo-<%= post.id %>" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
-      </div>
       <div class="row">
-        <div class="col-md-10 col-md-offset-1 mx-auto postShow-wrap">
+        <div class="mx-auto w-100">
           <div class="row post-wrap">
             <div class="col-md-8">
               <div class="card-left">
@@ -58,7 +53,7 @@
                   <%= form_for [post, Comment.new], html: { class: "w-100" }, remote: true do |f| %>
                     <%= f.hidden_field :user_id, value: current_user.id %>
                     <%= f.hidden_field :post_id, value: post.id %>
-                    <%= f.text_field :comment, class: "form-control comment-input border-0", placeholder: "コメント ...", autocomplete: :off %>
+                    <%= f.text_field :comment, class: "form-control comment-input border-0", placeholder: "コメントを追加...", autocomplete: :off %>
                   <% end %>
                 </div>
               </div>
