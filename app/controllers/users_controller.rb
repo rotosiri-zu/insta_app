@@ -1,10 +1,11 @@
 class UsersController < ApplicationController
+  before_action :set_user, only: %i(show following followers)
+
   def index
     @users = User.search(params[:search])
   end
 
   def show
-    @user = User.find(params[:id])
     if current_user.stamp_true && current_user != @user
       foot_stamp = FootStamp.find_by(to_user_id: @user.id, from_user_id: current_user.id)
       if foot_stamp
@@ -17,11 +18,9 @@ class UsersController < ApplicationController
   end
 
   def following
-    @user = User.find(params[:id])
   end
 
   def followers
-    @user = User.find(params[:id])
   end
 
   def likes
@@ -58,4 +57,9 @@ class UsersController < ApplicationController
     @foot_stamps = FootStamp.where(to_user_id: current_user.id).order("updated_at DESC")
     FootStamp.where(to_user_id: current_user.id, checked: false).update_all(checked: true)
   end
+
+  private
+    def set_user
+      @user = User.find(params[:id])
+    end
 end
