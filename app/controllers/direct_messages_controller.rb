@@ -5,8 +5,10 @@ class DirectMessagesController < ApplicationController
     if @direct_message.save
       Pusher.trigger('dm-channel','new-dm', {
               user_name: current_user.user_name,
-              message: @direct_message.message 
+              message: @direct_message.message
             })
+    else
+      flash[:alert] = "メッセージに失敗しました"
     end
     redirect_to direct_message_space_path(id: params[:direct_message][:direct_message_space_id])
   end
