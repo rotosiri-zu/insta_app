@@ -1,2 +1,2 @@
 $("#follow_form").html("<%= escape_javascript(render('partial/unfollow')) %>");
-$("#followers").html('<%= @user.followers.count %>');
+$("#followers").html("<%= escape_javascript("フォロワー#{@user.followers.count}人") %>");

@@ -3,9 +3,9 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="list-group text-center">
-        <%= image_tag avatar_url(user), class: "round-img mx-auto", style: "width:70px; height:70px;" %>
-        <p><%= "#{user.user_name}さんのフォローをやめますか？" %></p>
-        <%= form_for(current_user.active_relationships.find_by(followed_id: user.id),
+        <%= image_tag avatar_url(@user), class: "round-img mx-auto", style: "width:70px; height:70px;" %>
+        <p><%= "#{@user.user_name}さんのフォローをやめますか？" %></p>
+        <%= form_for(current_user.active_relationships.find_by(followed_id: @user.id),
                      html: { method: :delete }) do |f| %>
           <%= f.submit "フォローをやめる", class: "list-group-item list-group-item-action" %>
         <% end %>
