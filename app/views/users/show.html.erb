@@ -36,8 +36,8 @@
 </div>
 <div class="container">
   <div class="posts">
-    <% if @user.posts.any? %>
-      <% @user.posts.each do |post|%>
+    <% if @posts.any? %>
+      <% @posts.each do |post|%>
         <div class="imageBox">
           <a data-toggle="modal" data-target="#photo-<%= post.id %>" class="modal-open">
             <%= image_tag post.photos.first.image.url(:medium), class: "card-img-top" %>

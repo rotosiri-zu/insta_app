@@ -6,6 +6,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @posts = Post.where(user_id: @user.id).order('created_at DESC')
     if current_user.stamp_true && current_user != @user
       foot_stamp = FootStamp.find_by(to_user_id: @user.id, from_user_id: current_user.id)
       if foot_stamp
@@ -24,13 +25,13 @@ class UsersController < ApplicationController
   end
 
   def likes
-    @user = User.find(params[:id])
-    @posts = Post.find(Like.where(user_id: @user.id).pluck(:post_id))
+    @user = User.includes(posts: [:likes, :photos]).find(params[:id])
+    @posts = Post.find(Like.where(user_id: @user.id).order('created_at DESC').pluck(:post_id))
   end
 
   def liked
     @user = User.includes(posts: [:likes, :photos]).find(params[:id])
-    @posts =@user.posts.select{|post| post.likes != []}
+    @posts = Post.where(user_id: @user.id).order('created_at DESC').to_a.select{|post| post.likes != []}
   end
 
   def notifications
