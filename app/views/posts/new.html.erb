@@ -16,7 +16,8 @@
             </div>
           </div>
           <div class="mb-3">
-            <%= file_field_tag "images[]", type: :file, multiple: false %>
+            <%= file_field_tag "images[]", type: :file, multiple: true %>
+            <%= file_field_tag "images[]", type: :file, multiple: true %>
           </div>
           <%= f.submit "投稿する", class: "btn btn-primary" %>
         <% end %>
