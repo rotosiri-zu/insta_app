@@ -1,0 +1,56 @@
+/* So that the modal is displayed in the preview.. You can probably remove this and the above rule */
+.img-comment-list {
+    list-style: none;
+    padding: 0;
+}
+.img-comment-list li {
+    margin:0;
+    margin-top:10px;
+}
+
+.img-comment-list li > div {
+    display:table-cell;
+}
+
+.img-comment-list img {
+    border-radius:50%;
+    width: 42px;
+    height: 42px;
+    margin-right: 10px;
+    margin-top: 20px;
+}
+
+.img-comment-list p {
+    margin: 0;
+}
+
+.img-comment-list span {
+    font-size: .8em;
+    color: #aaa;
+}
+
+@media only screen and (max-width : 992px) {
+    .modal-content {
+        border-radius: 0;
+        max-height: 100%;
+        overflow-y: auto;
+    }
+
+    .img-modal .modal-image {
+        height: calc(100% - 100px);
+    }
+
+    .img-modal .modal-meta {
+        height: auto;
+    }
+
+    .img-modal .modal-meta-top {
+        position: static;
+        padding-top: 15px;
+    }
+
+    .img-modal .modal-meta-bottom {
+        position: static;
+        margin: 0 -15px;
+    }
+}

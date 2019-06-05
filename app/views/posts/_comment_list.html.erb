@@ -1,13 +1,25 @@
-<% post.comments.each do |comment| %>
-  <div class="mb-2">
-    <% if comment.user == current_user %>
-      <%= link_to "", comment_path(comment), method: :delete, remote: true, class: "delete-comment" %>
-    <% end %>
-    <span>
-      <strong>
-        <%= link_to comment.user.user_name, user_path(comment.user), class: "no-text-decoration black-color" %>
-      </strong>
-    </span>
-    <span><%= comment.comment %></span>
-  </div>
-<% end %>
+<ul class="img-comment-list">
+  <li>
+    <div class="comment-img">
+      <%= image_tag avatar_url(post.user), class: "post-profile-icon" %>
+    </div>
+    <div class="comment-text">
+      <strong><%= post.user.user_name %></strong>
+      <p><%= post.caption %></p> <span class="date sub-text"><%= time_ago_in_words(post.created_at).upcase %>前</span>
+    </div>
+  </li>
+  <% post.comments.each do |comment| %>
+    <li>
+      <% if comment.user == current_user %>
+        <%= link_to "", comment_path(comment), method: :delete, remote: true, class: "delete-comment" %>
+      <% end %>
+      <div class="comment-img">
+        <%= image_tag avatar_url(comment.user), class: "post-profile-icon" %>
+      </div>
+      <div class="comment-text">
+        <strong><%= link_to comment.user.user_name, user_path(comment.user)%></strong>
+        <p><%= comment.comment %></p> <span class="date sub-text"><%= time_ago_in_words(comment.created_at).upcase %>前</span>
+      </div>
+    </li>
+  <% end %>
+</ul>
