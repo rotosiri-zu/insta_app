@@ -2,11 +2,9 @@ class PostsController < ApplicationController
   before_action :authenticate_user!, except: %i(index)
   before_action :set_post, only: %i(show destroy)
 
-  PER = 9
-
   def index
     if user_signed_in?
-      @posts = current_user.feed.includes(:photos, :user, :likes).order('created_at DESC').page(params[:page]).per(3)
+      @posts = current_user.feed.includes(:photos, :user, :likes).order('created_at DESC').page(params[:page]).per(9)
     else
       redirect_to home_path
     end
