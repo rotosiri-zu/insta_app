@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @posts = Post.where(user_id: @user.id).order('created_at DESC')
+    @posts = Post.where(user_id: @user.id).order('created_at DESC').page(params[:page]).per(9)
     if current_user.stamp_true && current_user != @user
       foot_stamp = FootStamp.find_by(to_user_id: @user.id, from_user_id: current_user.id)
       if foot_stamp
@@ -26,16 +26,18 @@ class UsersController < ApplicationController
 
   def likes
     @user = User.includes(posts: [:likes, :photos]).find(params[:id])
-    @posts = Post.find(Like.where(user_id: @user.id).order('created_at DESC').pluck(:post_id))
+    posts = Post.find(Like.where(user_id: @user.id).order('created_at DESC').pluck(:post_id))
+    @posts = Kaminari.paginate_array(posts).page(params[:page]).per(9)
   end
 
   def liked
     @user = User.includes(posts: [:likes, :photos]).find(params[:id])
-    @posts = Post.where(user_id: @user.id).order('created_at DESC').to_a.select{|post| post.likes != []}
+    posts = Post.where(user_id: @user.id).order('created_at DESC').to_a.select{|post| post.likes != []}
+    @posts = Kaminari.paginate_array(posts).page(params[:page]).per(9)
   end
 
   def notifications
-    @notifications = Notification.where(to_user_id: current_user.id).order('created_at DESC')
+    @notifications = Notification.where(to_user_id: current_user.id).order('created_at DESC').page(params[:page]).per(10)
   end
 
   def notification_check
@@ -55,7 +57,7 @@ class UsersController < ApplicationController
   end
 
   def foot_stamps
-    @foot_stamps = FootStamp.where(to_user_id: current_user.id).order("updated_at DESC")
+    @foot_stamps = FootStamp.where(to_user_id: current_user.id).order("updated_at DESC").page(params[:page]).per(10)
     FootStamp.where(to_user_id: current_user.id, checked: false).update_all(checked: true)
   end
 

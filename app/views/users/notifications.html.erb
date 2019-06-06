@@ -1,6 +1,6 @@
 <% provide(:title, "notification") %>
 <div class="container text-center">
-  <h3><%= "#{@notifications.size}件の通知" %></h3>
+  <h3>通知</h3>
   <%= link_to "全て既読にする", notification_check_user_path, method: :put %>
   <% @notifications.each do |notification| %>
     <% if notification %>
@@ -51,4 +51,7 @@
       </div>
     <% end %>
   <% end %>
+  <div class="offset-md-4">
+    <%= paginate @notifications %>
+  </div>
 </div>
