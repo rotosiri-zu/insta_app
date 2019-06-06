@@ -11,7 +11,7 @@ class UsersController < ApplicationController
       foot_stamp = FootStamp.find_by(to_user_id: @user.id, from_user_id: current_user.id)
       if foot_stamp
         foot_stamp.touch
-        foot_stamp.checked = false
+        foot_stamp.update(checked: false)
       else
         FootStamp.create(to_user_id: @user.id, from_user_id: current_user.id)
       end
