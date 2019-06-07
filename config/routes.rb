@@ -17,4 +17,5 @@ Rails.application.routes.draw do
   resources :relationships, only: %i(create destroy)
   resources :direct_messages, only: %i(create)
   resources :direct_message_spaces, only: %i(create show)
+  resources :hashtags, param: :hashname, only: %i(index show)
 end
