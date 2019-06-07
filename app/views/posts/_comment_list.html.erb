@@ -5,7 +5,7 @@
     </div>
     <div class="comment-text">
       <strong><%= post.user.user_name %></strong>
-      <p><%= post.caption %></p> <span class="date sub-text"><%= time_ago_in_words(post.created_at).upcase %>前</span>
+      <p><%= render_by_hashtag(post.caption) %></p> <span class="date sub-text"><%= time_ago_in_words(post.created_at).upcase %>前</span>
     </div>
   </li>
   <% post.comments.each do |comment| %>

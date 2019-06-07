@@ -17,4 +17,8 @@ module ApplicationHelper
       page_title + " | " + base_title
     end
   end
+
+  def render_by_hashtag(caption)
+    caption.gsub(/[#＃][^#＃\p{blank}]+/){|match| link_to match, hashtag_path(match.slice(1..-1))}.html_safe
+  end
 end
