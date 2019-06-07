@@ -7,51 +7,10 @@
     <div>
   </div>
   </header>
-  <div class="container">
-    <div class="messagesArea messages" id="dmArea">
-      <% @direct_messages.each do |direct_message| %>
-        <% if direct_message.user == current_user %>
-          <div class="message selfMessage d-flex align-items-center">
-            <%= image_tag avatar_url(direct_message.user), class: "post-profile-icon" %>
-            <span class="mr-2">
-              <%= direct_message.user.user_name %>
-            </span>
-            <div class="commonMessage selfMessage">
-              <div>
-                <%= direct_message.message %>
-              </div>
-            </div>
-            <div>
-              <div>
-                <%= time_ago_in_words(direct_message.created_at).upcase %>前
-              </div>
-              <% if direct_message.checked %>
-                <div>既読</div>
-              <% end %>
-            </div>
-          </div>
-        <% else %>
-          <div class="message">
-            <%= image_tag avatar_url(direct_message.user), class: "post-profile-icon" %>
-            <span>
-              <%= direct_message.user.user_name %>
-            </span>
-            <div class="commonMessage">
-              <div>
-                <%= direct_message.message %>
-              </div>
-            </div>
-            <span>
-              <%= time_ago_in_words(direct_message.created_at).upcase %>前
-            </span>  
-          </div>
-        <% end %>
-      <% end %>
-    </div>
-  </div>
+  <%= render "direct_message_spaces/direct_messages" %>
   <div class='container'>
-    <div class="row parts">
-      <%= form_with model: @direct_message, html: { class: "messageInputForm_input" } do |f| %>
+    <div class="row parts" id="direct-message-form-post-<%= @direct_message.id.to_s %>">
+      <%= form_with model: @direct_message, html: { class: "messageInputForm_input" }, remote: true do |f| %>
         <%= f.hidden_field :user_id, value: current_user.id %>
         <%= f.hidden_field :direct_message_space_id, value: params[:id] %>
         <%= f.text_field :message, class: "form-control comment-input border-0", placeholder: "メッセージを入力 ...", autocomplete: :off %>
