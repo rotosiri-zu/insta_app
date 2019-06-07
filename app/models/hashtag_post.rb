@@ -1,6 +1,4 @@
-class PostHashtag < ApplicationRecord
-  belongs_to :post
+class HashtagPost < ApplicationRecord
   belongs_to :hashtag
-  validates  :post_id, presence: true
-  validates  :Hashtag_id,   presence: true
+  belongs_to :post
 end
