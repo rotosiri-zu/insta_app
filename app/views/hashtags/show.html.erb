@@ -1,0 +1,17 @@
+<% provide(:title, "#" + @hashtag.hashname) %>
+<div class="container">
+  <div class="profile-wrap">
+    <div class="row">
+      <div class="col-md-4 text-center">
+      </div>
+      <div class="col-md-8">
+        <div class="row">
+          <h1><%= "#" + @hashtag.hashname %></h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <%= render "partial/photos_index", posts: @posts %>
+</div>

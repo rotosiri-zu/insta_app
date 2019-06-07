@@ -1,0 +1,3 @@
+<% @hashtags.each do |hashtag| %>
+  <h1><%= link_to hashtag.hashname, hashtag_path(hashtag.hashname) %><h1>
+<% end %>
