@@ -24,6 +24,7 @@ RSpec.feature "Follows", type: :feature do
       click_button "フォロー中"
       sleep 1
       click_button "フォローをやめる"
+      sleep 1
     }.to change(user.following, :count).by(-1).and change(other.followers, :count).by(-1)
     expect(page).to have_button "フォローする"
   end

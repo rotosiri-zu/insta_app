@@ -8,7 +8,7 @@ RSpec.feature "Posts", type: :feature do
     sign_in user
     expect {
       visit new_post_path
-      fill_in "コメントを書く", with: "コメント"
+      fill_in "コメントを書く(＃〜でハッシュタグ)", with: "コメント"
       attach_file photo_path
       click_button "投稿する"
       expect(page).to have_current_path root_path

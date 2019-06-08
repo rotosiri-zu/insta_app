@@ -15,7 +15,7 @@ RSpec.feature "Comments", type: :feature do
     fill_in "comment_comment", with: "テストコメント"
     find("#comment_comment").native.send_keys(:return)
     sleep 1
-    expect(page).to have_selector "span", text:"テストコメント"
+    expect(page).to have_selector "p", text:"テストコメント"
     expect(post.reload.comments.size).to eq 1
   end
 
