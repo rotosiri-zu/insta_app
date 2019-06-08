@@ -8,11 +8,13 @@ class Post < ApplicationRecord
 
   after_create do
     post = Post.find_by(id: self.id)
-    # 半角もしくは全角の"#"に続けて、#やスペース以外の文字が１文字以上続く文字列をハッシュタグとする
-    hashtags  = self.caption.scan(/[#＃][^#＃\p{blank}]+/)
-    hashtags.uniq.map do |hashtag|
-      tag = Hashtag.find_or_create_by(hashname: hashtag.slice(1..-1)) #先頭の"#"は除いて保存
-      post.hashtags << tag
+    if post.caption
+      # 半角もしくは全角の"#"に続けて、#やスペース以外の文字が１文字以上続く文字列をハッシュタグとする
+      hashtags  = self.caption.scan(/[#＃][^#＃\p{blank}]+/)
+      hashtags.uniq.map do |hashtag|
+        tag = Hashtag.find_or_create_by(hashname: hashtag.slice(1..-1)) #先頭の"#"は除いて保存
+        post.hashtags << tag
+      end
     end
   end
 
