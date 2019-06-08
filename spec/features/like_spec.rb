@@ -1,14 +1,14 @@
 require 'rails_helper'
 
 RSpec.feature "Likes", type: :feature do
-  given(:photo_path){ Rails.root.join("app", "assets", "images","icon.png") }
-  given(:user){ FactoryBot.create(:user) }
-  given(:other){ FactoryBot.create(:user) }
+  given(:photo_path) { Rails.root.join("app", "assets", "images", "icon.png") }
+  given(:user) { FactoryBot.create(:user) }
+  given(:other) { FactoryBot.create(:user) }
 
-  scenario "user make like other's post", js:true do
+  scenario "user make like other's post", js: true do
     sign_in user
     post = other.posts.create
-    photo = post.photos.create(image: Rack::Test::UploadedFile.new(photo_path))
+    post.photos.create(image: Rack::Test::UploadedFile.new(photo_path))
     visit user_path(other)
     page.first(".card-img-top").click
     sleep 1
@@ -27,10 +27,10 @@ RSpec.feature "Likes", type: :feature do
     expect(page).to have_css("img")
   end
 
-  scenario "delete like", js:true do
+  scenario "delete like", js: true do
     sign_in user
     post = other.posts.create
-    photo = post.photos.create(image: Rack::Test::UploadedFile.new(photo_path))
+    post.photos.create(image: Rack::Test::UploadedFile.new(photo_path))
     post.likes.create(user: user)
     visit user_path(other)
     page.first(".card-img-top").click
@@ -48,5 +48,4 @@ RSpec.feature "Likes", type: :feature do
     visit liked_user_path(other)
     expect(page).not_to have_css(".card-wrap")
   end
-
 end

@@ -1,27 +1,27 @@
 require 'rails_helper'
 
 RSpec.feature "Notifications", type: :feature do
-  given(:photo_path){ Rails.root.join("app", "assets", "images","icon.png") }
-  given(:user){ FactoryBot.create(:user) }
-  given(:other){ FactoryBot.create(:user) }
+  given(:photo_path) { Rails.root.join("app", "assets", "images", "icon.png") }
+  given(:user) { FactoryBot.create(:user) }
+  given(:other) { FactoryBot.create(:user) }
 
   scenario "come when user is followed " do
-    expect{
+    expect do
       sign_in other
       visit user_path(user)
       click_button "フォローする"
       sign_in user
       visit notifications_user_path(user)
-    }.to change{Notification.all.size}.by(1)
+    end.to change { Notification.all.size }.by(1)
     expect(page).to have_content "#{other.user_name}からフォローされました"
     within("i.fa-bell") do
       expect(page).to have_content 1
     end
   end
-  scenario "come when user's post is liked", js:true do
+  scenario "come when user's post is liked", js: true do
     @post = user.posts.create
-    photo = @post.photos.create(image: Rack::Test::UploadedFile.new(photo_path))
-    expect{
+    @post.photos.create(image: Rack::Test::UploadedFile.new(photo_path))
+    expect do
       sign_in other
       visit user_path(user)
       page.first(".card-img-top").click
@@ -30,16 +30,16 @@ RSpec.feature "Notifications", type: :feature do
       sleep 1
       sign_in user
       visit notifications_user_path(user)
-    }.to change{Notification.all.size}.by(1)
+    end.to change { Notification.all.size }.by(1)
     expect(page).to have_content "#{other.user_name}からいいねが届いています"
     within("i.fa-bell") do
       expect(page).to have_content 1
     end
   end
-  scenario "come when user's post is commented", js:true do
+  scenario "come when user's post is commented", js: true do
     @post = user.posts.create
-    photo = @post.photos.create(image: Rack::Test::UploadedFile.new(photo_path))
-    expect{
+    @post.photos.create(image: Rack::Test::UploadedFile.new(photo_path))
+    expect do
       sign_in other
       visit user_path(user)
       page.first(".card-img-top").click
@@ -49,14 +49,14 @@ RSpec.feature "Notifications", type: :feature do
       sleep 1
       sign_in user
       visit notifications_user_path(user)
-    }.to change{Notification.all.size}.by(1)
+    end.to change { Notification.all.size }.by(1)
     expect(page).to have_content "#{other.user_name}からコメントが届いています"
     within("i.fa-bell") do
       expect(page).to have_content 1
     end
   end
   scenario "come when direct message is given" do
-    expect{
+    expect do
       sign_in other
       visit user_path(user)
       click_button "DMを送る"
@@ -64,7 +64,7 @@ RSpec.feature "Notifications", type: :feature do
       click_button "Create Direct message"
       sign_in user
       visit notifications_user_path(user)
-    }.to change{Notification.all.size}.by(1)
+    end.to change { Notification.all.size }.by(1)
     expect(page).to have_content "#{other.user_name}からダイレクトメッセージが届いています"
     within("i.fa-bell") do
       expect(page).to have_content 1

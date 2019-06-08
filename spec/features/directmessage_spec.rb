@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.feature "Directmessages", type: :feature do
-  given(:user){ FactoryBot.create(:user) }
-  given(:other){ FactoryBot.create(:user) }
+  given(:user) { FactoryBot.create(:user) }
+  given(:other) { FactoryBot.create(:user) }
 
   scenario "send directmessage" do
     sign_in user

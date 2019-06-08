@@ -11,7 +11,7 @@ RSpec.describe User, type: :model do
     expect(user.errors[:name]).to include("名前は空白にできません")
   end
   it "is invalid with too long (50 characters) name" do
-    user = FactoryBot.build(:user, name: "*"*51)
+    user = FactoryBot.build(:user, name: "*" * 51)
     user.valid?
     expect(user.errors[:name]).to include("50文字以内の名前のみ登録できます")
   end
@@ -21,7 +21,7 @@ RSpec.describe User, type: :model do
     expect(user.errors[:user_name]).to include("ユーザーネームは空白にできません")
   end
   it "is invalid with too long (50 characters) user_name" do
-    user = FactoryBot.build(:user, user_name: "*"*51)
+    user = FactoryBot.build(:user, user_name: "*" * 51)
     user.valid?
     expect(user.errors[:user_name]).to include("50文字以内のユーザーネームのみ登録できます")
   end
@@ -52,16 +52,16 @@ RSpec.describe User, type: :model do
     user = FactoryBot.build(:user)
     user.save
     user.posts.create!
-    expect{user.destroy}.to change(user.posts, :count).by(-1)
+    expect { user.destroy }.to change(user.posts, :count).by(-1)
   end
   it "associated likes should be destroyed" do
     user1 = FactoryBot.create(:user)
     user2 = FactoryBot.create(:user)
     post = user2.posts.create!
     Like.create(user: user1, post: post)
-    expect{user1.destroy}.to change(user1.likes, :count).by(-1)
+    expect { user1.destroy }.to change(user1.likes, :count).by(-1)
   end
-  it "should follow and unfollow a user" do
+  it "follows and unfollow a user" do
     user1 = FactoryBot.create(:user)
     user2 = FactoryBot.create(:user)
     expect(user1.following?(user2)).to eq false

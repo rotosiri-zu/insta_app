@@ -2,7 +2,8 @@ class DirectMessageSpacesController < ApplicationController
   before_action :authenticate_user!
   def create
     current_user_dm_spaces = DirectMessageSpaceUser.where(user_id: current_user.id).map(&:direct_message_space)
-    dm_space = DirectMessageSpaceUser.where(direct_message_space: current_user_dm_spaces, user_id: params[:user_id]).map(&:direct_message_space).first
+    dm_space = DirectMessageSpaceUser.where(direct_message_space: current_user_dm_spaces, user_id: params[:user_id]).
+      map(&:direct_message_space).first
     if dm_space.blank?
       dm_space = DirectMessageSpace.create
       DirectMessageSpaceUser.create(direct_message_space: dm_space, user_id: current_user.id)
@@ -20,5 +21,4 @@ class DirectMessageSpacesController < ApplicationController
     @direct_messages = DirectMessage.includes(:user).where(direct_message_space: dm_space).order(:created_at)
     @direct_messages.where.not(user_id: current_user.id).update_all(checked: true)
   end
-
 end
