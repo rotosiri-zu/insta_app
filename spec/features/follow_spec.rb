@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.feature "Follows", type: :feature do
   given(:user) { FactoryBot.create(:user) }

@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.feature "UserSessions", type: :feature do
   scenario "new user register" do

@@ -4,7 +4,7 @@ class PostsController < ApplicationController
 
   def index
     if user_signed_in?
-      @posts = current_user.feed.includes(:photos, :user, :likes).order('created_at DESC').page(params[:page]).per(POST_PER)
+      @posts = current_user.feed.includes(:photos, :user, :likes).order("created_at DESC").page(params[:page]).per(POST_PER)
     else
       redirect_to home_path
     end

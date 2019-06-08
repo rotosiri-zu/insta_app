@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.feature "FootStamps", type: :feature do
   given(:true_user) { FactoryBot.create(:user, stamp_true: true) }
