@@ -13,14 +13,11 @@ RSpec.feature "Likes", type: :feature do
     page.first(".card-img-top").click
     sleep 1
     page.first(".love").click
-    wait_for_css_appear(".loved") do
-      expect(page).to have_css(".loved")
-    end
-    wait_for_ajax do
-      expect(user.reload.likes.size).to eq 1
-      expect(post.reload.likes.size).to eq 1
-      expect(page).to have_content "いいね！1件"
-    end
+    sleep 1
+    expect(page).to have_css(".loved")
+    expect(user.reload.likes.size).to eq 1
+    expect(post.reload.likes.size).to eq 1
+    expect(page).to have_content "いいね！1件"
     visit likes_user_path(user)
     expect(page).to have_css("img")
     visit liked_user_path(other)
@@ -36,13 +33,10 @@ RSpec.feature "Likes", type: :feature do
     page.first(".card-img-top").click
     sleep 1
     page.first(".loved").click
-    wait_for_css_appear(".love") do
-      expect(page).to have_css(".love")
-    end
-    wait_for_ajax do
-      expect(user.reload.likes.size).to eq 0
-      expect(post.reload.likes.size).to eq 0
-    end
+    sleep 1
+    expect(page).to have_css(".love")
+    expect(user.reload.likes.size).to eq 0
+    expect(post.reload.likes.size).to eq 0
     visit likes_user_path(user)
     expect(page).not_to have_css(".card-wrap")
     visit liked_user_path(other)
