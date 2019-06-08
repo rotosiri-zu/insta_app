@@ -1,10 +1,13 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :get_notification_count
   before_action :get_dm_count
   before_action :get_foot_stamp_count
+
+  USER_PER = 9
+  POST_PER = 9
+  INDEX_PER = 10
 
   def get_notification_count
     if current_user
