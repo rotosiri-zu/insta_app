@@ -35,11 +35,9 @@
               <div class="card-right">
                 <div class="card-right-comment pr-3">
                   <div class="card-right-name d-flex">
-                    <% unless current_user == post.user %>
-                      <%= link_to user_path(post.user) do %>
-                        <%= image_tag avatar_url(post.user), class: "post-profile-icon" %>
-                        <strong><%= post.user.user_name %></strong>
-                      <% end %>
+                    <%= link_to user_path(post.user) do %>
+                      <%= image_tag avatar_url(post.user), class: "post-profile-icon" %>
+                      <strong><%= post.user.user_name %></strong>
                     <% end %>
                     <% if post.user_id == current_user.id %>
                       <%= link_to post_path(post), method: :delete, class: "ml-auto mx-0 my-auto" do %>

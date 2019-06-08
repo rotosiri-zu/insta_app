@@ -4,7 +4,5 @@
     <%= link_to "following", following_user_path(params[:id]),class: "btn btn-dafault w-100" %>
     <%= link_to "followers", followers_user_path(params[:id]),class: "btn btn-primary w-100" %>
   </div>
-  <% @user.followers.each do |follower| %>
-    <%= render "user", user: follower %>
-  <% end %>
+  <%= render "user_index", users: @user.followers %>
 </div>
