@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: %i(show following followers)
 
   def index
-    @users = User.search(params[:search])
+    @users = User.all.page(params[:page]).per(9)
   end
 
   def show

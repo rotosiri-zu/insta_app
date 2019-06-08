@@ -1,6 +1,3 @@
 <% provide(:title, "All users") %>
-<div class="container">
-  <% @users.each do |user| %>
-    <%= render user %>
-  <% end %>
-</div>
+<%= render "users/user_index", users: @users  %>
+<%= paginate(@users) %>
