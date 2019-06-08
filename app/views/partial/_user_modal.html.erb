@@ -1,0 +1,80 @@
+<div class="modal fade" id="photo-<%= user.id %>" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="container">
+        <div class="profile-wrap">
+          <div class="row">
+            <div class="col-md-4 text-center">
+              <%= link_to user_path(user) do %>
+                <%= image_tag avatar_url(user), class: "round-img" %>
+              <% end %>
+            </div>
+            <div class="col-md-8">
+              <div class="row">
+                <%= link_to user_path(user) do %>
+                  <h1><%= user.user_name %></h1>
+                <% end %>
+                <% if user == current_user %>
+                  <%= link_to "プロフィールを編集", edit_user_registration_path, class: "btn btn-outline-dark common-btn edit-profile-btn" %>
+                  <button type="button" class="setting" data-toggle="modal" data-target="#exampleModal"></button>
+                <% end %>
+                <% if user_signed_in? %>
+                  <%= render "partial/follow_form", user: user %>
+                <% end %>
+                <% unless current_user?(user) %>
+                  <%= form_tag direct_message_spaces_path, method: :post do %>
+                    <input name="user_id" type="hidden" value="<%= user.id %>" />
+                    <%= submit_tag "DMを送る", class: "btn btn-primary common-btn edit-profile-btn" %>
+                  <% end %>
+                <% end %>
+                <%= render "users/login_modal", user: user %>
+              </div>
+              <section class="stats">
+                <%= render "partial/stats", user: user %>
+              </section>
+              <p id="userName"><strong><%= user.name %></strong></p>
+              <div class="bio">
+                <%= user.bio %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div id="carousel-<%= user.id %>" class="carousel slide" data-ride="carousel">
+          <div class="carousel-inner">
+            <% user.posts.each.with_index(1) do |post, i| %>
+              <% if i == 1%>
+                <div class="carousel-item active">
+                  <div class="comment-img">
+                    <%= image_tag avatar_url(post.user), class: "post-profile-icon" %>
+                    <strong><%= post.user.user_name %></strong>
+                    <span><%= render_by_hashtag(post.caption) %></span> <span class="date sub-text"><%= time_ago_in_words(post.created_at).upcase %>前</span>
+                  </div>
+                  <%= image_tag post.photos.first.image.url(:medium), class: "card-img-top" %>
+                </div>
+              <% else %>
+                <div class="carousel-item">
+                  <div class="comment-img">
+                    <%= image_tag avatar_url(post.user), class: "post-profile-icon" %>
+                    <strong><%= post.user.user_name %></strong>
+                    <span><%= render_by_hashtag(post.caption) %></span> <span class="date sub-text"><%= time_ago_in_words(post.created_at).upcase %>前</span>
+                  </div>
+                  <%= image_tag post.photos.first.image.url(:medium), class: "card-img-top" %>        
+                </div>
+              <% end %>
+            <% end %>
+            <a class="carousel-control-prev" href="#carousel-<%= user.id%>" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carousel-<%= user.id%>" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

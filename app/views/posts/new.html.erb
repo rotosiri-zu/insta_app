@@ -12,15 +12,13 @@
               <%= image_tag avatar_url(current_user), class: "post-profile-icon" %>
             </div>
             <div class="col pl-0">
-              <%= f.text_field :caption, class: "form-control border-0", placeholder: "コメントを書く" %>
+              <%= f.text_field :caption, class: "form-control border-0", placeholder: "コメントを書く(＃〜でハッシュタグ)" %>
             </div>
           </div>
-          <% 4.times do |i| %>
-            <div class="mb-3">
-              <span>画像<%= i+1 %></span>
-              <%= file_field_tag "images[]", type: :file, multiple: true %>
-            </div>
-          <% end %>
+          <div class="mb-3">
+            <span>画像(複数選択可)</span>
+            <%= file_field_tag "images[]", type: :file, multiple: true %>
+          </div>
           <%= f.submit "投稿する", class: "btn btn-primary" %>
         <% end %>
       </div>

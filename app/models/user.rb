@@ -24,23 +24,21 @@ class User < ApplicationRecord
   def self.find_for_oauth(auth)
     user = User.where(uid: auth.uid, provider: auth.provider).first
 
-    unless user
-      user = User.create(
-        uid:      auth.uid,
-        provider: auth.provider,
-        email:    User.dummy_email(auth),
-        password: Devise.friendly_token[0, 20]
-      )
-    end
+    user ||= User.create(
+      uid:      auth.uid,
+      provider: auth.provider,
+      email:    User.dummy_email(auth),
+      password: Devise.friendly_token[0, 20]
+    )
 
     user
   end
 
   def self.search(search)
     if search
-     where(['user_name LIKE ?', "%#{search}%"])
+      where(['user_name LIKE ?', "%#{search}%"])
     else
-     all
+      all
     end
   end
 
@@ -59,9 +57,9 @@ class User < ApplicationRecord
   def following?(other_user)
     following.include?(other_user)
   end
-  private
 
   def self.dummy_email(auth)
     "#{auth.uid}-#{auth.provider}@example.com"
   end
+  private_class_method :dummy_email
 end

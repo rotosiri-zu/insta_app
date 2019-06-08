@@ -4,7 +4,7 @@ class PostsController < ApplicationController
 
   def index
     if user_signed_in?
-      @posts = current_user.feed.includes(:photos, :user, :likes).order('created_at DESC').page(params[:page]).per(9)
+      @posts = current_user.feed.includes(:photos, :user, :likes).order('created_at DESC').page(params[:page]).per(POST_PER)
     else
       redirect_to home_path
     end
@@ -21,8 +21,8 @@ class PostsController < ApplicationController
         @post.save
         @post.photos.create(image: img)
       end
-    redirect_to root_path
-    flash[:notice] = "投稿が保存されました"
+      redirect_to root_path
+      flash[:notice] = "投稿が保存されました"
     else
       redirect_to root_path
       flash[:alert] = "投稿に失敗しました"
@@ -44,11 +44,12 @@ class PostsController < ApplicationController
   end
 
   private
-    def post_params
-      params.require(:post).permit(:caption).merge(user_id: current_user.id)
-    end
 
-    def set_post
-      @post = Post.find_by(id: params[:id])
-    end
+  def post_params
+    params.require(:post).permit(:caption).merge(user_id: current_user.id)
+  end
+
+  def set_post
+    @post = Post.find_by(id: params[:id])
+  end
 end

@@ -1,2 +1,5 @@
-$("#follow_form").html("<%= escape_javascript(render('partial/follow')) %>");
-$("#followers").html('<%= @user.followers.count %>');
+$("#follow_form").html("<%= escape_javascript(render('partial/follow', user: @user)) %>");
+$("#followers").html("<%= escape_javascript("フォロワー#{@user.followers.count}人") %>");
+$("#unfollowModal").modal('hide');
+$('body').removeClass('modal-open');
+$(".modal-backdrop").remove();

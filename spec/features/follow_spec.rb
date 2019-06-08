@@ -1,30 +1,31 @@
 require 'rails_helper'
 
 RSpec.feature "Follows", type: :feature do
-  given(:user){ FactoryBot.create(:user) }
-  given(:other){ FactoryBot.create(:user) }
+  given(:user) { FactoryBot.create(:user) }
+  given(:other) { FactoryBot.create(:user) }
 
   scenario "user follow other" do
-    expect{
+    expect do
       sign_in user
       visit user_path(other)
       expect(user.following?(other)).to eq false
       click_button "フォローする"
       expect(page).to have_button "フォロー中"
-    }.to change(user.following, :count).by(1).and change(other.followers, :count).by(1)
+    end.to change(user.following, :count).by(1).and change(other.followers, :count).by(1)
     expect(page).to have_button "フォロー中"
   end
 
-  scenario "user unfollow other", js:true do
+  scenario "user unfollow other", js: true do
     user.follow(other)
-    expect{
+    expect do
       sign_in user
       visit user_path(other)
       expect(user.following?(other)).to eq true
       click_button "フォロー中"
       sleep 1
       click_button "フォローをやめる"
-    }.to change(user.following, :count).by(-1).and change(other.followers, :count).by(-1)
+      sleep 1
+    end.to change(user.following, :count).by(-1).and change(other.followers, :count).by(-1)
     expect(page).to have_button "フォローする"
   end
 

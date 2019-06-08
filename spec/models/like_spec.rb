@@ -6,6 +6,7 @@ RSpec.describe Like, type: :model do
     @other = FactoryBot.create(:user)
     @post = @other.posts.create
   end
+
   it "is valid with user and post" do
     like = Like.new(user: @user, post: @post)
     expect(like).to be_valid
