@@ -39,7 +39,7 @@ body {
 }
 
 .setting {
-  background-image: image-url("parts4.png");
+  background-image: image-url("setting.png");
   background-repeat: no-repeat;
   height: 24px;
   width: 24px;
@@ -90,29 +90,11 @@ body {
 }
 
 .love {
-  background-image: image-url("parts5");
+  background-image: image-url("love");
   background-repeat: no-repeat;
   height: 36px;
   width: 36px;
   background-size: 36px !important;
-}
-
-.comment {
-  margin-left: 8px;
-  background-image: image-url("parts6");
-  background-repeat: no-repeat;
-  height: 36px;
-  width: 36px;
-  background-size: 40px !important;
-}
-
-.profile-icon{
-  margin-left: 8px;
-  background-image: image-url("parts3");
-  background-repeat: no-repeat;
-  height: 36px;
-  width: 36px;
-  background-size: 40px !important;
 }
 
 .post-time {
@@ -152,7 +134,7 @@ body {
 }
 
 .delete-post-icon {
-  background-image: image-url("parts9");
+  background-image: image-url("delete-post");
   background-repeat: no-repeat;
   width: 20px;
   height: 20px;
@@ -162,7 +144,7 @@ body {
 }
 
 .loved {
-  background-image: image-url("parts7");
+  background-image: image-url("loved");
   background-repeat: no-repeat;
   height: 36px;
   width: 36px;
@@ -177,7 +159,7 @@ body {
 }
 
 .delete-comment {
-  background-image: image-url("parts8");
+  background-image: image-url("delete-comment");
   background-repeat: no-repeat;
   width: 11px;
   height: 11px;

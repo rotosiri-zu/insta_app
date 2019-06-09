@@ -1,5 +1,6 @@
 class DirectMessagesController < ApplicationController
   before_action :authenticate_user!
+  
   def create
     @direct_message = DirectMessage.new(direct_message_params)
     dm_space = DirectMessageSpace.find_by(id: params[:id])
