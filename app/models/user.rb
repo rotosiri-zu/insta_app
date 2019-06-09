@@ -25,18 +25,20 @@ class User < ApplicationRecord
     user = User.where(uid: auth.uid, provider: auth.provider).first
 
     user ||= User.create(
-      uid:      auth.uid,
-      provider: auth.provider,
-      email:    User.dummy_email(auth),
-      password: Devise.friendly_token[0, 20]
+      uid:            auth.uid,
+      provider:       auth.provider,
+      name:           auth.info.name,
+      user_name:      auth.info.name,
+      email:          User.dummy_email(auth),
+      remote_profile_photo_url:  auth.info.image,
+      password:       Devise.friendly_token[0, 20]
     )
-
     user
   end
 
   def self.search(search)
     if search
-      where(['user_name LIKE ?', "%#{search}%"])
+      where(["user_name LIKE ?", "%#{search}%"])
     else
       all
     end
@@ -61,5 +63,4 @@ class User < ApplicationRecord
   def self.dummy_email(auth)
     "#{auth.uid}-#{auth.provider}@example.com"
   end
-  private_class_method :dummy_email
 end

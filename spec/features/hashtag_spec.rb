@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.feature "Hashtags", type: :feature do
   given(:photo_path) { Rails.root.join("app", "assets", "images", "icon.png") }

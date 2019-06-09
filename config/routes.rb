@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
-  root 'posts#index'
-  get  '/home', to: 'static_pages#home'
-  get  '/about', to: 'static_pages#about'
+  devise_for :users, controllers: {
+                                    omniauth_callbacks: "users/omniauth_callbacks",
+                                    registrations: "users/registrations"}
+  root "posts#index"
+  get  "/home", to: "static_pages#home"
+  get  "/about", to: "static_pages#about"
   resources :users do
     member do
       get :following, :followers, :likes, :liked, :notifications, :dm, :foot_stamps
