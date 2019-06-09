@@ -3,66 +3,93 @@
   <div class="row">
     <div class="col-md-8 mx-auto">
       <div class="profile-form-wrap">
-        <h2>編集ページ</h2>
-        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-        <div class="form-group">
-          <%= f.label :profile_photo, "プロフィール画像" %><br>
-          <%= f.file_field :profile_photo %>
-        </div>
-          <div class="form-group">
-            <%= f.label :name, "名前" %>
-            <%= f.text_field :name, autofocus: true, class: "form-control" %>
-          </div>
-          <div class="form-group">
-            <%= f.label :user_name, "ユーザーネーム" %>
-            <%= f.text_field :user_name, autofocus: true, class: "form-control" %>
-          </div>
-          <div class="form-group">
-            <%= f.label :website, "ウェブサイト" %>
-            <%= f.text_field :website, autofocus: true, class: "form-control" %>
-          </div>
-          <div class="form-group">
-            <%= f.label :bio, "自己紹介" %>
-            <%= f.text_field :bio, autofocus: true, class: "form-control" %>
-          </div>
-          <div class="form-group">
-            <%= f.label :email, "メールアドレス" %>
-            <%= f.email_field :email, autofocus: true, class: "form-control" %>
-          </div>
-          <div class="form-group">
-            <%= f.label :phone_number, "電話番号" %>
-            <%= f.text_field :phone_number, autofocus: true, class: "form-control" %>
-          </div>
-          <div class="form_group">
-            <%= f.label :sex, "性別" %><br />
-            <%= f.select(:sex,[["男性", "男性"], ["女性", "女性"]], class: 'form-control', :prompt => "性別を選択して下さい") %>
-          </div>
-          <div class="form_group">
-            <%= f.label :stamp_true, "足跡設定" %><br />
-            <%= f.select(:stamp_true,[["足跡をつける", "true"], ["足跡をつけない", "false"]], class: "form-control") %>
-          </div>
-          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-            <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-          <% end %>
-          <div class="field">
-            <%= f.label :password, "新しいパスワード" %> <i>(パスワードを変更しない場合は空欄)</i><br />
-            <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
-            <% if @minimum_password_length %>
-              <br />
-              <em><%= @minimum_password_length %> 文字以上のパスワード</em>
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <a href="#tab1" class="nav-link active" data-toggle="tab"> プロフィールの編集 </a>
+          </li>
+          <li class="nav-item">
+            <a href="#tab2" class="nav-link" data-toggle="tab">パスワードの変更</a>
+          </li>
+          <li class="nav-item">
+            <a href="#tab3" class="nav-link" data-toggle="tab">足跡の設定</a>
+          </li>
+          <li class="nav-item">
+            <a href="#tab4" class="nav-link" data-toggle="tab">アカウントの削除</a>
+          </li>
+        </ul>
+
+        <div class="tab-content">
+          <div id="tab1" class="tab-pane active">
+            <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+            <div class="form-group">
+              <%= f.label :profile_photo, "プロフィール画像" %><br>
+              <%= f.file_field :profile_photo %>
+            </div>
+              <div class="form-group">
+                <%= f.label :name, "名前" %>
+                <%= f.text_field :name, autofocus: true, class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= f.label :user_name, "ユーザーネーム" %>
+                <%= f.text_field :user_name, autofocus: true, class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= f.label :website, "ウェブサイト" %>
+                <%= f.text_field :website, autofocus: true, class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= f.label :bio, "自己紹介" %>
+                <%= f.text_field :bio, autofocus: true, class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= f.label :email, "メールアドレス" %>
+                <%= f.email_field :email, autofocus: true, class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= f.label :phone_number, "電話番号" %>
+                <%= f.text_field :phone_number, autofocus: true, class: "form-control" %>
+              </div>
+              <div class="form_group">
+                <%= f.label :sex, "性別" %><br />
+                <%= f.select(:sex,[["男性", "男性"], ["女性", "女性"]], class: 'form-control', :prompt => "性別を選択して下さい") %>
+              </div>
+              <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+                <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+              <% end %>
+              <%= f.submit "変更する", class: "btn btn-primary mt-3" %>
             <% end %>
           </div>
-          <div class="field">
-            <%= f.label :password_confirmation, "新しいパスワードの確認" %><br />
-            <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
+          <div id="tab2" class="tab-pane">
+            <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+            <div class="field">
+              <%= f.label :password, "新しいパスワード" %> <span><%= "(#{@minimum_password_length}文字以上のパスワード)" if @minimum_password_length %></span><br />
+              <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
+            </div>
+            <div class="field">
+              <%= f.label :password_confirmation, "新しいパスワードの確認" %>
+              <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
+            </div>
+            <div class="field">
+              <%= f.label :current_password, "現在のパスワード" %>
+              <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control" %>
+            </div>
+            <%= f.submit "変更する", class: "btn btn-primary mt-3" %>
+          <% end %>
           </div>
-          <div class="field">
-            <%= f.label :current_password, "現在のパスワード" %> <i>(プロフィールを変更する場合は入力が必要)</i><br />
-            <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control" %>
+          <div id="tab3" class="tab-pane">
+            <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+            <div class="form_group">
+              <%= f.label :stamp_true, "足跡設定" %><br />
+              <%= f.select(:stamp_true,[["足跡をつける", "true"], ["足跡をつけない", "false"]], class: "form-control") %>
+            </div>
+            <%= f.submit "変更する", class: "btn btn-primary mt-3" %>
+          <% end %>
           </div>
-          <%= f.submit "変更する", class: "btn btn-primary" %>
-        <% end %>
-        <%= button_to "アカウント削除", registration_path(resource_name), class: "btn btn-secondary mt-1",data: { confirm: "本当に削除してもよろしいですか？" }, method: :delete %>
+          <div id="tab4" class="tab-pane">
+            <h3>アカウントの削除</h3>
+            <%= button_to "アカウント削除", registration_path(resource_name), class: "btn btn-secondary",data: { confirm: "本当に削除してもよろしいですか？" }, method: :delete %>
+          </div>
+        </div>
       </div>
     </div>
   </div>
