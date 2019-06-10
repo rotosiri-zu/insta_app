@@ -3,7 +3,7 @@ class Post < ApplicationRecord
   has_many :photos, dependent: :destroy
   has_many :likes, -> { order(created_at: :desc) }, dependent: :destroy
   has_many :comments, -> { order(created_at: :desc) }, dependent: :destroy
-  has_many :hashtag_posts
+  has_many :hashtag_posts, dependent: :destroy
   has_many :hashtags, through: :hashtag_posts
 
   after_create do
