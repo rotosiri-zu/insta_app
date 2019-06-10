@@ -20,7 +20,7 @@
           <%= n.hidden_field :to_user_id, value: @dm_space_user.id %>
           <%= n.hidden_field :from_user_id, value: current_user.id %>
         <% end %>
-        <%= f.submit %>
+        <%= f.submit "投稿する", class: "btn btn-primary" %>
       <% end %>
     </div>
   </div>
