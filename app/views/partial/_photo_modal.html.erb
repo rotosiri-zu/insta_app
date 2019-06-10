@@ -35,22 +35,16 @@
               <div class="card-right">
                 <div class="card-right-comment pr-3">
                   <div class="card-right-name d-flex">
-                    <div class="col-lg-1 col-md-1 col-sm-1 col-1">
-                      <%= link_to user_path(post.user) do %>
-                        <%= image_tag avatar_url(post.user), class: "post-profile-icon" %>
-                        <strong><%= post.user.user_name %></strong>
+                    <%= link_to user_path(post.user), class: "no-text-decoration" do %>
+                      <%= image_tag avatar_url(post.user), class: "post-profile-icon" %>
+                      <strong><%= post.user.user_name %></strong>
+                    <% end %>
+                    <% if post.user_id == current_user.id %>
+                      <%= link_to post_path(post), method: :delete, class: "ml-auto mx-0 my-auto" do %>
+                        <div class="delete-post-icon">
+                        </div>
                       <% end %>
-                    </div>
-                    <div class="ml-3">
-                      <% if post.user_id == current_user.id %>
-                        <%= link_to post_path(post), method: :delete, class: "ml-auto mx-0 my-auto" do %>
-                          <div class="delete-post-icon">
-                          </div>
-                        <% end %>
-                      <% else %>
-                        <%= render "partial/follow_form", user: post.user ,class:"w-100" %>
-                      <% end %>
-                  </div>
+                    <% end %>
                   </div>
                   <div class="comment-post-id">
                     <div class="m-2">
