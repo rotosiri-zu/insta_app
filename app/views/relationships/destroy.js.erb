@@ -1,5 +1,5 @@
-$("#follow_form").html("<%= escape_javascript(render('partial/follow', user: @user)) %>");
-$("#followers").html("<%= escape_javascript("フォロワー#{@user.followers.count}人") %>");
-$("#unfollowModal").modal('hide');
+$("#follow_form-<%= @user.id %>").html("<%= escape_javascript(render('partial/follow', user: @user)) %>");
+$("#followers-<%= @user.id %>").html("<%= escape_javascript("フォロワー#{@user.followers.count}人") %>");
+$("#unfollowModal-<%= @user.id %>").modal('hide');
 $('body').removeClass('modal-open');
 $(".modal-backdrop").remove();

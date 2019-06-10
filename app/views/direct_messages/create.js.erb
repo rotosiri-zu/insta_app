@@ -1,2 +1,3 @@
-$('#direct-message-form-post-<%= @direct_message.id.to_s %>').
-  html('<%= j render "direct_message_spaces/direct_messages" %>');
+$("#direct_message_space-<%= @dm_space.id %>").
+  html('<%= j render "direct_message_spaces/direct_messages", direct_messages: @direct_messages %>');
+$("#direct-message-form-post-<%= @dm_space.id.to_s %> #direct_message_message").val("");

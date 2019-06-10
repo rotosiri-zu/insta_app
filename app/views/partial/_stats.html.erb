@@ -4,7 +4,7 @@
     <%= "投稿#{user.posts.map(&:photos).count}件" %>
   </strong>
   <%= link_to followers_user_path(user) do %>
-    <strong id="followers" class="stat">
+    <strong id="followers-<%= user.id %>" class="stat">
       <%= "フォロワー#{user.followers.count}人" %>
     </strong>
   <% end %>

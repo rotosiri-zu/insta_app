@@ -1,19 +1,18 @@
 class DirectMessagesController < ApplicationController
   before_action :authenticate_user!
-  
+
   def create
     @direct_message = DirectMessage.new(direct_message_params)
-    dm_space = DirectMessageSpace.find_by(id: params[:id])
-    @direct_messages = DirectMessage.includes(:user).where(direct_message_space: dm_space).order(:created_at)
+    @dm_space = DirectMessageSpace.find_by(id: @direct_message.direct_message_space_id)
+    @direct_messages = DirectMessage.includes(:user).where(direct_message_space: @dm_space).order(:created_at)
     if @direct_message.save
-      Pusher.trigger("dm-channel", "new-dm", {
-        user_name: current_user.user_name,
-        message: @direct_message.message,
-      })
+      respond_to do |format|
+        format.html { redirect_to @dm_space }
+        format.js
+      end
     else
       flash[:alert] = "メッセージに失敗しました"
     end
-    redirect_to direct_message_space_path(id: params[:direct_message][:direct_message_space_id])
   end
 
   private

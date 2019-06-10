@@ -7,9 +7,11 @@
     <div>
   </div>
   </header>
-  <%= render "direct_message_spaces/direct_messages" %>
+  <div id="direct_message_space-<%= @dm_space.id %>">
+    <%= render "direct_message_spaces/direct_messages", direct_messages: @direct_messages %>
+  </div>
   <div class='container'>
-    <div class="row parts" id="direct-message-form-post-<%= @direct_message.id.to_s %>">
+    <div class="row parts" id="direct-message-form-post-<%= @dm_space.id.to_s %>">
       <%= form_with model: @direct_message, html: { class: "messageInputForm_input" }, remote: true do |f| %>
         <%= f.hidden_field :user_id, value: current_user.id %>
         <%= f.hidden_field :direct_message_space_id, value: params[:id] %>
@@ -18,28 +20,8 @@
           <%= n.hidden_field :to_user_id, value: @dm_space_user.id %>
           <%= n.hidden_field :from_user_id, value: current_user.id %>
         <% end %>
-        <%= f.submit %>
+        <%= f.submit "投稿する", class: "btn btn-primary" %>
       <% end %>
     </div>
   </div>
 </div>
-<script>
-  var channel = pusher.subscribe('dm-channel');
-  channel.bind('new-dm', function(data) {
-      let user_name = data.user_name;
-      let message = data.message;
-      let div = document.getElementById('dmArea');
-      div.innerHTML += `
-        <div class="message selfMessage d-flex align-items-center">
-          <img class="post-profile-icon" src="https://www.gravatar.com/avatar/a3abaf7b52db6e8220ce0c94c095e18f.jpg" %>
-          <span class="mr-2">
-            ${user_name}
-          </span>
-          <div class="commonMessage selfMessage">
-            <div>
-              <div>${message}</div>
-            </div>
-          </div>
-        </div>`;
-  });
-</script>

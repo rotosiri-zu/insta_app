@@ -1,6 +1,6 @@
 <div class="container">
   <div class="messagesArea messages" id="dmArea">
-    <% @direct_messages.each do |direct_message| %>
+    <% direct_messages.each do |direct_message| %>
       <% if direct_message.user == current_user %>
         <div class="message selfMessage d-flex align-items-center">
           <%= image_tag avatar_url(direct_message.user), class: "post-profile-icon" %>
