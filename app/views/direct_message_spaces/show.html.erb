@@ -25,23 +25,3 @@
     </div>
   </div>
 </div>
-<script>
-  var channel = pusher.subscribe('dm-channel');
-  channel.bind('new-dm', function(data) {
-      let user_name = data.user_name;
-      let message = data.message;
-      let div = document.getElementById('dmArea');
-      div.innerHTML += `
-        <div class="message selfMessage d-flex align-items-center">
-          <img class="post-profile-icon" src="https://www.gravatar.com/avatar/a3abaf7b52db6e8220ce0c94c095e18f.jpg" %>
-          <span class="mr-2">
-            ${user_name}
-          </span>
-          <div class="commonMessage selfMessage">
-            <div>
-              <div>${message}</div>
-            </div>
-          </div>
-        </div>`;
-  });
-</script>
