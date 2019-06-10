@@ -1,7 +1,10 @@
 <div class="chatPage">
   <header class="header">
   <div class="chatPartner">
-    <%= image_tag avatar_url(@dm_space_user), class: "round-img" %>
+    <a data-toggle="modal" data-target="#photo-<%= @dm_space_user.id %>" class="modal-open">
+      <%= image_tag avatar_url(@dm_space_user), class: "round-img" %>
+    </a>
+    <%= render "partial/user_modal", user: @dm_space_user %>
     <div class="text-center">
       <%= @dm_space_user.user_name %>
     <div>
