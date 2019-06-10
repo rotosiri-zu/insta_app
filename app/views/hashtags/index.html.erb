@@ -6,7 +6,9 @@
       <div class="col-4 col-sm-4 col-md-4">
         <div class="card">
           <%= link_to hashtag_path(hashtag.hashname) do %>
-            <%= image_tag hashtag.posts.last.photos.last.image.url(:medium), class: "card-img-top" %>
+            <% if hashtag.posts.last %>
+              <%= image_tag hashtag.posts.last.photos.last.image.url(:medium), class: "card-img-top" %>
+            <% end %>
             <div class="card-body text-center">
               <h5 class="card-title"><%= "#" + hashtag.hashname %></h5>
             </div>
