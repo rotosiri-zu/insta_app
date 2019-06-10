@@ -13,6 +13,7 @@ class User < ApplicationRecord
   has_many :following, through: :active_relationships,  source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
   has_many :direct_messages, dependent: :destroy
+  has_many :direct_message_space_users, dependent: :destroy 
   has_many :notifications ,class_name: "Notification", foreign_key: "to_user_id", dependent: :destroy
   has_many :notifications ,class_name: "Notification", foreign_key: "from_user_id", dependent: :destroy
   has_many :users
