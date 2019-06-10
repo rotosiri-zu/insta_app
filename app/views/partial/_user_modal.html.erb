@@ -19,7 +19,7 @@
                   <button type="button" class="setting" data-toggle="modal" data-target="#exampleModal"></button>
                 <% end %>
                 <% if user_signed_in? %>
-                  <%= render "partial/follow_form", user: user %>
+                  <%#= render "partial/follow_form", user: user %>
                 <% end %>
                 <% unless current_user?(user) %>
                   <%= form_tag direct_message_spaces_path, method: :post do %>
@@ -60,7 +60,7 @@
                     <strong><%= post.user.user_name %></strong>
                     <span><%= render_by_hashtag(post.caption) %></span> <span class="date sub-text"><%= time_ago_in_words(post.created_at).upcase %>前</span>
                   </div>
-                  <%= image_tag post.photos.first.image.url(:medium), class: "card-img-top" %>        
+                  <%= image_tag post.photos.first.image.url(:medium), class: "card-img-top" %>
                 </div>
               <% end %>
             <% end %>
