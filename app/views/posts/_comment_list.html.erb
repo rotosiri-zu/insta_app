@@ -8,7 +8,7 @@
       <p><%= render_by_hashtag(post.caption) %></p> <span class="date sub-text"><%= time_ago_in_words(post.created_at).upcase %>前</span>
     </div>
   </li>
-  <% post.comments.each do |comment| %>
+  <% post.comments.reverse.each do |comment| %>
     <li>
       <% if comment.user == current_user %>
         <%= link_to "", comment_path(comment), method: :delete, remote: true, class: "delete-comment" %>
