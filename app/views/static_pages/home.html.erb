@@ -15,10 +15,11 @@
           <%= link_to "アカウントの登録画面へ", new_user_registration_path, class:"btn btn-info w-100 mt-3"%>
           <br>
           <%= form_for(@user, url: session_path(:user)) do |f| %>
-            <%= f.hidden_field :email, value: "test@mail" %>
+            <%= f.hidden_field :email, value: User.find(1).email %>
             <%= f.hidden_field :password, value: "password" %>
             <%= f.submit "テストユーザーでログイン", class:"btn btn-success mt-3 w-100"%>
           <% end %>
+          <span>※テストユーザの削除・編集は不可</span>
           <%= link_to "Facebookでログイン", omniauth_authorize_path(:user, :facebook), class:"btn btn-primary mt-3 w-100" %>
         </div>
       </div>
