@@ -7,5 +7,8 @@ if Rails.env.production?
       :aws_secret_access_key => ENV['S3_SECRET_KEY']
     }
     config.fog_directory     =  ENV['S3_BUCKET']
+    config.fog_attributes = {cache_control: 'max-age=31536000', expires: 1.year.from_now.httpdate}
+    config.fog_public = true
+    config.asset_host = 'https://d2b556l5j4mfna.cloudfront.net'
   end
 end
