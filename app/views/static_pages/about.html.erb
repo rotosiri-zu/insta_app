@@ -1,8 +1,8 @@
 <% provide(:title, "About") %>
 <h2>アプリの概要</h2>
 <ul class="list-group">
-  <li class="list-group-item">このアプリは某SNSを参考に開発し、写真共有を通じて気になる人を探して人と繋がるSNSです。
-                              SNSによくある機能を網羅しました</li>
+  <li class="list-group-item">このアプリはInstagramを参考に開発し、写真共有を通じて気になる人を探して人と繋がるSNSです。
+                              SNSによくある機能を一通り網羅しました</li>
 </ul>
 <h2>アプリの機能一覧</h2>
 <ul class="list-group">
@@ -23,8 +23,10 @@
   <li class="list-group-item">ユーザー管理機能(devise)</li>
   <li class="list-group-item">Facebookログイン機能(omniauth-facebook)</li>
   <li class="list-group-item">画像アップロード機能(carrier-wave, Amazon S3)</li>
-  <li class="list-group-item">本番環境 AWS EC2</li>
-  <li class="list-group-item">DB MySQL</li>
+  <li class="list-group-item">本番環境 AWS EC2(Nginx,Unicorn)</li>
+  <li class="list-group-item">DB MySQL5.7</li>
   <li class="list-group-item">Amazon Route53</li>
   <li class="list-group-item">AWS Certificate Manager</li>
+  <li class="list-group-item">Amazon CloudFront</li>
 </ul>
+<h4><%= link_to "Homeに戻る", root_path%></h4>
