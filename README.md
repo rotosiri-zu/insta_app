@@ -3,7 +3,7 @@
 
 写真投稿、いいね、コメント、フォロー、ハッシュタグ、DM、足跡機能や未読通知機能などを搭載してます。
 
-url: [https://www.insta_app.net](https://www.insta-app.net)
+url: [https://www.instaapp.net](https://www.insta-app.net)
 
 # AWS構成図
 ![AWS構成図](https://user-images.githubusercontent.com/40578383/59324523-38049000-8d1a-11e9-91c2-96c9d9925b11.jpg)
