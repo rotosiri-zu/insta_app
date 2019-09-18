@@ -5,6 +5,7 @@ class Post < ApplicationRecord
   has_many :comments, -> { order(created_at: :desc) }, dependent: :destroy
   has_many :hashtag_posts, dependent: :destroy
   has_many :hashtags, through: :hashtag_posts
+  validates :photos, associated: true
 
   after_create do
     post = Post.find_by(id: id)
