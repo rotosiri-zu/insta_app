@@ -51,7 +51,9 @@
                     <strong><%= post.user.user_name %></strong>
                     <span><%= render_by_hashtag(post.caption) %></span> <span class="date sub-text"><%= time_ago_in_words(post.created_at).upcase %>前</span>
                   </div>
-                  <%= image_tag post.photos.first.image.url(:medium), class: "card-img-top" %>
+                  <% if post.photos.first %>
+                    <%= image_tag post.photos.first.image.url(:medium), class: "card-img-top" %>
+                  <% end %>
                 </div>
               <% else %>
                 <div class="carousel-item">
@@ -60,7 +62,9 @@
                     <strong><%= post.user.user_name %></strong>
                     <span><%= render_by_hashtag(post.caption) %></span> <span class="date sub-text"><%= time_ago_in_words(post.created_at).upcase %>前</span>
                   </div>
-                  <%= image_tag post.photos.first.image.url(:medium), class: "card-img-top" %>
+                  <% if post.photos.first%>
+                    <%= image_tag post.photos.first.image.url(:medium), class: "card-img-top" %>
+                  <% end %>
                 </div>
                 <a class="carousel-control-prev" href="#carousel-<%= user.id%>" role="button" data-slide="prev">
                   <span class="carousel-control-prev-icon" aria-hidden="true"></span>
